@@ -1,4 +1,4 @@
-package entities;
+package app.entities;
 
 public class Order {
     private int id;
