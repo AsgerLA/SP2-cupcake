@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+Admin --> (GET /admin)
+(GET /admin) --> (GET /admin/customers)
+(GET /admin/customers) --> (POST /admin/add-balance)
+(GET /admin/customers) --> (GET /admin/customer/{id})
+(GET /admin/customer/{id}) --> (POST /admin/remove-order/{id})
+
+User --> (GET /)
+(GET /) --> (POST /logout)
+(GET /) -->(GET /login)
+(GET /login) -->(GET /register)
+(GET /register) -->(POST /register)
+(GET /login) -> (POST /login)
+(POST /login) -> (GET /)
+(GET /) ---> (POST /order)
+(GET /) --> (GET /orders)
+
+note right of (POST /order) : Put in orders.
+
+note "Login success" as N2
+(GET /) .. N2
+N2 .. (POST /login)
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+
+Database: users orders toppings bottoms
+User: email password admin balance
+Order: user topping bottom price
+
+@enduml

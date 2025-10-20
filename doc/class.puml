@@ -1,0 +1,111 @@
+@startuml
+
+class Thymeleaf {
+    attribute("bottoms", OrderMapper.getBottoms());
+    attribute("toppings", OrderMapper.getToppings());
+
+    attribute("orders", OrderMapper.getUserOrders());
+
+
+    sessionAttribute("userId", user.id);
+    sessionAttribute("userEmail", user.email);
+}
+class Main {
+    Server.start()
+}
+class Server {
+    + static Database db;
+    + static void start()
+}
+
+
+class OrderController {
+    + static addRoutes(Javalin app);
+    + static void serveOrdersPage(Context ctx);
+    + static void handleOrderPost(Context ctx);
+    + static void handleRemoveOrderPost(Context ctx);
+}
+
+class UserDTO {
+    int id;
+    String email;
+    byte[] password; // hashed
+    double balance;
+    boolean admin;
+}
+
+class UserMapper {
+    + static boolean login(String email, String password);
+    + static UserDTO getUser(String email)
+    + static boolean register(String email, String password);
+    + static boolean delUser(int userId);
+    + static boolean updateUser(UserDTO user);
+}
+
+class UserController {
+    + static void addRoutes(Javalin app);
+    + static void serveLoginPage(Context ctx);
+    + static void serveRegisterPage(Context ctx);
+    + static void handleLoginPost(Context ctx);
+    + static void handleLogout(Context ctx);
+    + static void handleRegisterPost(Context ctx);
+}
+
+class ToppingDTO {
+    int id;
+    String name;
+    double price;
+}
+
+class BottomDTO {
+    int id;
+    String name;
+    double price;
+}
+
+class OrderDTO {
+    int id
+    int user_id;
+    int top_id;
+    int bot_id;
+    double price;
+}
+
+class Order {
+    int id;
+    String topping;
+    String bottom;
+    double price;
+}
+
+class OrderMapper {
+    + static List<Order> getUserOrders(int userId);
+    + static boolean addUserOrder(int userId, int topId, int botId);
+    + static List<Order> getAllOrders();
+    + static List<ToppingDTO> getToppings();
+    + static List<BottomsDTO> getBottoms();
+}
+
+class Database {
+    + Database(String username, String password, String url);
+    + Connection getConnection();
+}
+class DatabaseException {
+}
+Database -* DatabaseException
+Server *- Database
+
+Main -* Server
+Server *--* UserController
+Server *--* OrderController
+OrderMapper --* Order
+OrderMapper --* Server
+OrderMapper --* ToppingDTO
+OrderMapper --* BottomDTO
+OrderMapper --* OrderDTO
+UserMapper --* Server
+UserMapper --* UserDTO
+
+UserController -* UserDTO
+
+@enduml
