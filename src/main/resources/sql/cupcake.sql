@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS public.users
 (
     id serial NOT NULL,
     email character varying NOT NULL,
-    password character varying NOT NULL,
+    password bytea NOT NULL,
+    salt bytea NOT NULL,
     admin boolean NOT NULL,
     balance double precision NOT NULL,
     PRIMARY KEY (id)
