@@ -30,6 +30,13 @@ body{
   background-color: darksalmon;
   justify-content: space-between;
 }
+.flexbox-item1and2-in-upperbanner{
+  display: flex;
+  flex-direction: row;
+  height:7%;
+  justify-content: flex-start;
+
+}
 .button-like-text {
   display: inline-block;
   color: white;
@@ -181,4 +188,35 @@ body{
 }
 .bund-dropdown:hover .bund-content{
   display: block;
+}
+.flexbox-item-ordreinfo h1{
+
+  font-size: 96px;
+width: 120%;
+}
+.flexbox-item-ordreinfo{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: yellow;
+  padding-right: 100px;
+}
+.flexbox-item-ordreinfo span{
+  font-size: 32px;
+}
+.flexbox-container-ordrer{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height:100vh;
+  justify-content: flex-start;
+  align-content: center;
+  background-color: grey;
+}
+.flexbox-ordrer-data{
+  display: flex;
+  background-color: red;
+  width:100%;
+  height:70%;
 }
