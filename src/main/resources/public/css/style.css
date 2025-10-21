@@ -1,4 +1,8 @@
 
+.error {
+  color: red;
+}
+
 button {
   border: none;
   color: white;

@@ -26,6 +26,9 @@
         <h1>Indtast venligst dine oplysninger:</h1>
     </div>
     <div class="flexbox-item-inputfields-login">
+        <th:block th:if="${errmsg} != null">
+            <p class="error" th:text="${errmsg}"></p>
+        </th:block>
         <form method="post">
             <div class="email-input">
                 <label for="email">Email:</label> <br>
