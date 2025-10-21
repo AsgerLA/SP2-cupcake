@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS public.orders
     user_id integer NOT NULL,
     top_id integer NOT NULL,
     bot_id integer NOT NULL,
+    count integer NOT NULL,
     price double precision NOT NULL,
     PRIMARY KEY (id)
     );
