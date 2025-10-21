@@ -9,16 +9,18 @@
 <div class="flexbox-container-ordrer">
     <div class="flexbox-item-upperbanner">
         <div class="flexbox-item1and2-in-upperbanner">
-            <form class="header-menu" th:action="@{/login}" method="post">
+            <form class="header-menu" th:action="@{/login}" method="get">
                 <button class="button button-logpå">Log på</button>
             </form>
-            <form class="header-menu" th:action="@{/ordrer}" method="post">
+            <form class="header-menu" th:action="@{/ordrer}" method="get">
                 <button class="button button-ordrer">Ordrer</button>
             </form>
         </div>
         <div class="flexbox-item3and4-in-upperbanner">
-            <span class="button-like-text">Email</span>
-            <button class="button button-indkøbskurv">Indkøbskurv</button>
+            <span th:text="${user.email}"></span> <!-- maybe currentuser instead? -->
+            <form class="header-menu" th:action="@{/indkøbskurv}" method="get">
+                <button class="button button-indkøbskurv">Indkøbskurv</button>
+            </form>
         </div>
     </div>
 

@@ -23,8 +23,10 @@
       </form>
     </div>
     <div class="flexbox-item3and4-in-upperbanner">
-      <span class="button-like-text">Email</span>
-      <button class="button button-indkøbskurv">Indkøbskurv</button>
+      <span th:text="${user.email}"></span>
+      <form class="header-menu" th:action="@{/indkøbskurv}" method="get">
+        <button class="button button-indkøbskurv">Indkøbskurv</button>
+      </form>
     </div>
   </div>
   <div class="flexbox-item-picture&logo">

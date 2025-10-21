@@ -30,11 +30,18 @@ body{
 .flexbox-item-upperbanner{
   display: flex;
   width:100%;
-  height: 7%;
+  height: 60px;
   background-color: darksalmon;
   justify-content: space-between;
 }
 .flexbox-item1and2-in-upperbanner{
+  display: flex;
+  flex-direction: row;
+  height:7%;
+  justify-content: flex-start;
+
+}
+.flexbox-item3and4-in-upperbanner{
   display: flex;
   flex-direction: row;
   height:7%;
@@ -48,14 +55,15 @@ body{
   justify-content: flex-start;
 }
 .button-like-text {
-  display: inline-block;
+  display: flex;
   color: white;
-  padding: 15px 32px;
-  font-size: 16px;
+  height: 34px;
+  font-size: 18px;
+  padding-top: 16px;
   margin: 4px 2px;
-  background-color: darkgray;
-  text-align: center;
-  border-radius: 0px;
+  background-color: darksalmon;
+  justify-content: center;
+  border-radius: 0;
 }
 .button-like-text:hover {
   cursor: default;
@@ -75,6 +83,79 @@ body{
 .flexbox-item-text1 h1{
   margin-left: 5%;
   font-size: 72px;
+}
+.indkøbs-h1{
+  margin-left: 2%;
+  font-size: 72px;
+}
+.flexbox-container-selve-indkøbskurven{
+  display: flex;
+  flex-direction: row;
+  background-color: lightgrey;
+  width: 55%;
+  margin-right:100px;
+}
+.flexbox-container-prisbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  height: 50%;
+  background-color: lightgrey;
+  padding-bottom: 10px;
+}
+.flexbox-container-prisbox p{
+  margin-left: -150px;
+  font-size: 32px;
+}
+.ordrer-detaljer span{
+  margin-left: 8vw;
+  font-size: 24px;
+}
+.ordrer-box{
+  margin-top: 10px;
+  margin-right: 7px;
+  padding-bottom: 10px;
+  background-color: darksalmon;
+  width: 100%;
+  height: 10%;
+}
+.ordrer-antal input{
+  width: 35px;
+}
+.ordrer-del button{
+  border: none;
+  color: black;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 16px;
+
+  cursor: pointer;
+  background-color: darksalmon;
+}
+.ordrer-box-del{
+  width:10vw;
+  height:10%;
+  margin-top: 28px;
+
+}
+.ordrer-del button:hover {
+  background-color: salmon;
+}
+.ordrer-box-antal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-right: 7px;
+  margin-bottom: 30px;
+
+  background-color: darksalmon;
+  width: 10vw;
+  height: 6%;
 }
 .flexbox-item-text1-login{
   display:flex;
@@ -222,6 +303,22 @@ width: 120%;
   height:100vh;
   justify-content: flex-start;
   align-content: center;
+  background-color: grey;
+}
+.flexbox-container-indkøbskurv{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height:100vh;
+  justify-content: flex-start;
+  align-content: center;
+  background-color: grey;
+}
+.flexbox-container-nedre-indkøbskurv{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height:100vh;
   background-color: grey;
 }
 .flexbox-ordrer-data{
