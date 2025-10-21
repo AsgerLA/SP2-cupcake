@@ -1,3 +1,162 @@
-h1 {
-  color: red;
+
+button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: darkgray;
+}
+body{
+  margin: 0px;
+
+}
+.flexbox-container{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height:100vh;
+  justify-content: flex-start;
+  align-content: center;
+}
+.flexbox-item-upperbanner{
+  display: flex;
+  width:100%;
+  height: 7%;
+  background-color: darksalmon;
+  justify-content: space-between;
+}
+.button-like-text {
+  display: inline-block;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  margin: 4px 2px;
+  background-color: darkgray;
+  text-align: center;
+  border-radius: 0px;
+}
+.button-like-text:hover {
+  cursor: default;
+}
+.flexbox-item-picture\&logo{
+  display: flex;
+  background-color: grey;
+  width: 100%;
+  height: 35vh;
+
+  justify-content: center;
+}
+.flexbox-item-text1{
+  display: flex;
+  background-color: darksalmon;
+}
+.flexbox-item-text1 h1{
+  margin-left: 5%;
+  font-size: 72px;
+}
+.flexbox-item-text2{
+  display: flex;
+  background-color: darksalmon;
+}
+.flexbox-item-text2 h2{
+  margin-left: 5%;
+  font-size: 48px;
+}
+.flexbox-item-inputfields{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  background-color: darksalmon;
+
+}
+.flexbox-item-inputfields form{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 5vw;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-left: 5%;
+}
+
+/* drop down div'en */
+.topping-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.bund-dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+/* Selve dropdown knappen er stylet her */
+.topping-button {
+  background-color: gray;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.bund-button{
+  background-color: gray;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Det er cellerne i dropdownen der er stylet her */
+.topping-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+}
+/* Det er cellerne i dropdownen der er stylet her */
+.bund-content{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+}
+
+/* Each label behaves like a clickable line */
+.topping-content label {
+  display: block;
+  padding: 6px;
+  cursor: pointer;
+}
+.bund-content label{
+  display: block;
+  padding: 6px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.topping-content label:hover {
+  background-color: #eee;
+}
+.bund-content label:hover{
+  background-color: #eee;
+}
+
+/* Show on hover */
+.topping-dropdown:hover .topping-content {
+  display: block;
+}
+.bund-dropdown:hover .bund-content{
+  display: block;
 }
