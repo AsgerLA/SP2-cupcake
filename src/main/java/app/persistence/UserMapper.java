@@ -1,18 +1,105 @@
 package app.persistence;
 
+import app.Server;
 import app.entities.User;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import java.util.Arrays;
 
 public class UserMapper {
 
+    private static byte[] genSalt()
+    {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        return salt;
+    }
+
+    private static byte[] hashPassword(String password, byte[] salt)
+            throws Exception
+    {
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        return factory.generateSecret(spec).getEncoded();
+    }
+
     public static User login(String email, String password)
     {
-        System.out.println("TODO: login(): check database");
-        return new User(1, email, 0.0, false);
+        User user = null;
+
+        Connection conn = null;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT users.id, users.email, users.password, users.salt, users.admin, users.balance WHERE users.email=?";
+
+        try {
+            conn = Server.db.connect();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                byte[] inHash = rs.getBytes("password");
+                byte[] inSalt = rs.getBytes("salt");
+                byte[] hash = hashPassword(password, inSalt);
+                if (Arrays.equals(hash, inHash)) {
+                    user = new User(
+                            rs.getInt("id"),
+                            rs.getString("email"),
+                            rs.getDouble("balance"),
+                            rs.getBoolean("admin") );
+                }
+            }
+            assert !rs.next();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            if (conn != null)
+                Server.db.close(conn);
+        }
+
+        return user;
     }
 
     public static boolean register(String email, String password)
     {
-        System.out.println("TODO: register");
+        Connection conn = null;
+        PreparedStatement ps;
+        ResultSet rs;
+        String sqlQuery = "SELECT users.id WHERE users.email=?";
+        String sqlUpdate = "INSERT INTO users (email, password, salt, balance, admin) VALUES(?, ?, ?, ?, ?)";
+
+        try {
+            conn = Server.db.connect();
+            ps = conn.prepareStatement(sqlQuery);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (!rs.next()) {
+                byte[] salt = genSalt();
+                byte[] hash = hashPassword(password, salt);
+                ps = conn.prepareStatement(sqlUpdate);
+                ps.setString(1, email);
+                ps.setBytes(2, hash);
+                ps.setBytes(3, salt);
+                ps.setDouble(4, 0.0);
+                ps.setBoolean(5, false);
+                return (ps.executeUpdate() > 0);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            if (conn != null)
+                Server.db.close(conn);
+        }
         return false;
     }
 }
