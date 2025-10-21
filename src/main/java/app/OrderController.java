@@ -8,8 +8,8 @@ public class OrderController {
     public static void addRoutes(Javalin app)
     {
         app.get(Path.Web.ORDERS, OrderController::serveOrdersPage);
-        app.get(Path.Web.ORDER, OrderController::handleOrderPost);
-        app.get(Path.Web.REMOVE_ORDER, OrderController::handleRemoveOrderPost);
+        app.post(Path.Web.ORDER, OrderController::handleOrderPost);
+        app.post(Path.Web.REMOVE_ORDER, OrderController::handleRemoveOrderPost);
     }
 
     public static void serveOrdersPage(Context ctx)
