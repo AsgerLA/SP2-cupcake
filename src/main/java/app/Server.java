@@ -39,6 +39,7 @@ public class Server {
         });
 
         UserController.addRoutes(app);
+        OrderController.addRoutes(app);
 
         app.start(8000);
     }
