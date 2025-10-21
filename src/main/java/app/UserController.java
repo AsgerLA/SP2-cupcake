@@ -18,9 +18,11 @@ public class UserController {
     {
         app.get(Path.Web.INDEX, UserController::serveIndexPage);
         app.get(Path.Web.LOGIN, UserController::serveLoginPage);
+        app.get(Path.Web.BASKET, UserController::serveBasketPage);
         app.post(Path.Web.LOGIN, UserController::handleLoginPost);
         app.post(Path.Web.LOGOUT, UserController::handleLogoutPost);
         app.post(Path.Web.REGISTER, UserController::handleRegisterPost);
+
     }
 
     public static void serveIndexPage(Context ctx)
@@ -54,6 +56,12 @@ public class UserController {
     {
         ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
         ctx.render(Path.Template.LOGIN);
+        ctx.sessionAttribute("errmsg", null);
+    }
+
+    public static void serveBasketPage(Context ctx){
+        ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
+        ctx.render(Path.Template.BASKET);
         ctx.sessionAttribute("errmsg", null);
     }
 

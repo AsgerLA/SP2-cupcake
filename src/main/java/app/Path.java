@@ -10,10 +10,12 @@ public class Path {
         public static final String ORDERS = "/orders";
         public static final String ORDER = "/order";
         public static final String REMOVE_ORDER = "/remove-order";
+        public static final String BASKET = "/indkobskurv";
     }
 
     public static class Template {
         public static final String INDEX = "/index.html";
         public static final String LOGIN = "/login.html";
+        public static final String BASKET = "/indkobskurv.html";
     }
 }
