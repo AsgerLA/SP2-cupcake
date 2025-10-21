@@ -39,7 +39,7 @@ public class UserMapper {
         Connection conn = null;
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "SELECT users.id, users.email, users.password, users.salt, users.admin, users.balance WHERE users.email=?";
+        String sql = "SELECT users.id, users.email, users.password, users.salt, users.admin, users.balance FROM users WHERE users.email=?";
 
         try {
             conn = Server.db.connect();
@@ -75,7 +75,7 @@ public class UserMapper {
         Connection conn = null;
         PreparedStatement ps;
         ResultSet rs;
-        String sqlQuery = "SELECT users.id WHERE users.email=?";
+        String sqlQuery = "SELECT users.id FROM users WHERE users.email=?";
         String sqlUpdate = "INSERT INTO users (email, password, salt, balance, admin) VALUES(?, ?, ?, ?, ?)";
 
         try {

@@ -10,6 +10,8 @@ import io.javalin.http.HttpStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserController {
     public static void addRoutes(Javalin app)
@@ -53,6 +55,7 @@ public class UserController {
 
     public static void handleLoginPost(Context ctx)
     {
+        Map<String, Object> model = new HashMap<>();
         User user;
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
@@ -63,21 +66,22 @@ public class UserController {
         user = UserMapper.login(email, password);
         if (user == null) {
             ctx.attribute("errmsg", "* Invalid email or password");
-            ctx.redirect(Path.Template.LOGIN);
+            ctx.render(Path.Template.LOGIN, model);
             return;
         }
         ctx.sessionAttribute("user", user);
-        ctx.redirect(Path.Template.INDEX);
+        ctx.redirect(Path.Web.INDEX);
     }
 
     public static void handleLogoutPost(Context ctx)
     {
         ctx.sessionAttribute("user", null);
-        ctx.redirect(Path.Template.INDEX);
+        ctx.redirect(Path.Web.INDEX);
     }
 
     public static void handleRegisterPost(Context ctx)
     {
+        Map<String, Object> model = new HashMap<>();
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
         if (email == null || password == null) {
@@ -85,9 +89,10 @@ public class UserController {
             return;
         }
         if (!UserMapper.register(email, password)) {
-            ctx.attribute("errmsg", "* Failed to register");
+            model.put("errmsg", "* Failed to register");
+            ctx.render(Path.Template.LOGIN, model);
             return;
         }
-        ctx.redirect(Path.Template.LOGIN);
+        ctx.redirect(Path.Web.LOGIN);
     }
 }
