@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Cupcake</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <h1>Cupcake</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="../public/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="flexbox-container">
+  <div class="flexbox-item-upperbanner">
+    <div class="flexbox-item1&2-in-upperbanner">
+      <form class="header-menu" th:action="@{/kundeTemplates/login}" method="post">
+        <button class="button button-logpå">Log på</button>
+      </form>
+      <form class="header-menu" th:action="@{/kundeTemplates/ordrer}" method="post">
+        <button class="button button-ordrer">Ordrer</button>
+      </form>
+    </div>
+    <div class="flexbox-item3&4-in-upperbanner">
+      <span class="button-like-text">Email</span>
+      <button class="button button-indkøbskurv">Indkøbskurv</button>
+    </div>
+  </div>
+  <div class="flexbox-item-picture&logo">
+    <img src="../public/css/images/cupcakelogo.png" alt="cupcakebanner" width=955 height=305>
+  </div>
+  <div class="flexbox-item-text1">
+    <h1>Byg din cupcake!</h1>
+  </div>
+  <div class="flexbox-item-text2">
+    <h2>Vælg nedenfor:</h2>
+  </div>
+  <div class="flexbox-item-inputfields">
+    <form action="" method="POST">
+      <div class="topping-dropdown">
+        <button type="button" class="topping-button">Toppings ⬇</button>
+        <div class="topping-content">
+          <label><input type="checkbox" name="topping" value="chocolate"> Chokolade</label>
+          <label><input type="checkbox" name="topping" value="vanilla"> Vanilje</label>
+          <label><input type="checkbox" name="topping" value="strawberry"> Jordbær</label>
+        </div>
+      </div>
+      <div class="bund-dropdown">
+        <button type="button" class="bund-button">Bund ⬇</button>
+        <div class="bund-content">
+          <label><input type="checkbox" name="bund" value="Sandkage"> Sandkage</label>
+          <label><input type="checkbox" name="bund" value="Chokoladekage"> Chokoladekage</label>
+          <label><input type="checkbox" name="bund" value="Drømmekage"> Drømmekage</label>
+        </div>
+      </div>
+      <div class="antal-input">
+        <label for="antal">Antal:</label>
+        <input type="text" id="antal" name="antal">
+      </div>
+
+
+      <button type="submit">Submit Cupcake</button>
+
+    </form>
+  </div>
+</div>
+
+
+
+</body>
 </html>

@@ -59,6 +59,25 @@ body{
   margin-left: 5%;
   font-size: 72px;
 }
+.flexbox-item-text1-login{
+  display:flex;
+  background-color: darksalmon;
+  justify-content: center;
+}
+.flexbox-item-text1-login h1{
+  font-size: 72px;
+  margin-left: 5%;
+}
+.flexbox-item-inputfields-login{
+  display: flex;
+  width:100%;
+  height:50%;
+  background-color: darksalmon;
+  justify-content: center;
+}
+.flexbox-item-inputfields-login form{
+  margin-top: 50px;
+}
 .flexbox-item-text2{
   display: flex;
   background-color: darksalmon;
@@ -82,6 +101,9 @@ body{
   align-content: center;
   flex-wrap: wrap;
   margin-left: 5%;
+}
+.flexbox-item-inputfields-login button{
+  margin-top: 100px;
 }
 
 /* drop down div'en */

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../public/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<div class="flexbox-container">
+<div class="flexbox-item-upperbanner">
+    <div class="flexbox-item1&2-in-upperbanner">
+        <form class="header-menu" th:action="@{/kundeTemplates/login}" method="post">
+            <button class="button button-logpå">Log på</button>
+        </form>
+    </div>
+    <div class="flexbox-item3&4-in-upperbanner">
+        <form class="header-menu" th:action="@{/kundeTemplates/index}" method="post">
+            <button class="button button-index">Hovedside</button>
+        </form>
+    </div>
+</div>
+    <div class="flexbox-item-picture&logo">
+        <img src="../public/css/images/cupcakelogo.png" alt="cupcakebanner" width=955 height=305>
+    </div>
+    <div class="flexbox-item-text1-login">
+        <h1>Indtast venligst dine oplysninger:</h1>
+    </div>
+    <div class="flexbox-item-inputfields-login">
+        <form method="post">
+            <div class="email-input">
+                <label for="email">Email:</label> <br>
+                <input type="text" id="email">
+            </div>
+            <div class="password-input">
+                <label for="psw">Password:</label> <br>
+                <input type="password" id="psw">
+            </div>
+            <button type="submit" formaction="/login">Log på</button>
+            <button type="submit" formaction="/register">Opret</button>
+        </form>
+    </div>
+
+
+</div>
+
+</body>
+</html>
