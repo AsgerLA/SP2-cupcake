@@ -45,17 +45,20 @@ public class UserController {
                 Server.db.close(conn);
         }
 
+
+        ctx.attribute("user", ctx.sessionAttribute("user"));
         ctx.render(Path.Template.INDEX);
     }
 
     public static void serveLoginPage(Context ctx)
     {
+        ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
         ctx.render(Path.Template.LOGIN);
+        ctx.sessionAttribute("errmsg", null);
     }
 
     public static void handleLoginPost(Context ctx)
     {
-        Map<String, Object> model = new HashMap<>();
         User user;
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
@@ -63,10 +66,15 @@ public class UserController {
             ctx.status(HttpStatus.BAD_REQUEST);
             return;
         }
+        if (email.isEmpty() || password.isEmpty()) {
+            ctx.sessionAttribute("errmsg", "* Invalid email or password");
+            ctx.redirect(Path.Web.LOGIN);
+            return;
+        }
         user = UserMapper.login(email, password);
         if (user == null) {
-            ctx.attribute("errmsg", "* Invalid email or password");
-            ctx.render(Path.Template.LOGIN, model);
+            ctx.sessionAttribute("errmsg", "* Invalid email or password");
+            ctx.redirect(Path.Web.LOGIN);
             return;
         }
         ctx.sessionAttribute("user", user);
@@ -81,16 +89,16 @@ public class UserController {
 
     public static void handleRegisterPost(Context ctx)
     {
-        Map<String, Object> model = new HashMap<>();
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
         if (email == null || password == null) {
             ctx.status(HttpStatus.BAD_REQUEST);
             return;
         }
-        if (!UserMapper.register(email, password)) {
-            model.put("errmsg", "* Failed to register");
-            ctx.render(Path.Template.LOGIN, model);
+        if (email.isEmpty() || password.isEmpty() ||
+                !UserMapper.register(email, password)) {
+            ctx.sessionAttribute("errmsg", "* Failed to register");
+            ctx.redirect(Path.Web.LOGIN);
             return;
         }
         ctx.redirect(Path.Web.LOGIN);
