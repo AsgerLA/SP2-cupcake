@@ -37,6 +37,12 @@ body{
   justify-content: flex-start;
 
 }
+.flexbox-item-admin-box{
+  display: flex;
+  flex-direction: row;
+  height:7%;
+  justify-content: flex-start;
+}
 .button-like-text {
   display: inline-block;
   color: white;
