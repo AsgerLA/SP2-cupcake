@@ -33,9 +33,13 @@
     <div class="flexbox-ordrer-data">
         <div class="ordre-række" th:each="order : ${orders}">
             <span th:text="${order.id}"></span>
+            <span>-</span>
             <span th:text="${order.topping}"></span>
+            <span>-</span>
             <span th:text="${order.bottom}"></span>
+            <span>-</span>
             <span th:text="${antal}"></span>
+            <span>-</span>
             <span th:text="${order.pris}"></span>
         </div>
 

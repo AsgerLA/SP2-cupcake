@@ -18,8 +18,8 @@
       </form>
     </div>
     <div class="flexbox-item3and4-in-upperbanner">
-      <th:block th:if="${user != null}">
-        <span th:text="${user.email}"></span>
+      <th:block th:if="${user} != null">
+        <span th:text="${user.getEmail()}"></span>
       </th:block>
       <form class="header-menu" th:action="@{/indkobskurv}" method="get">
         <button class="button button-indkøbskurv">Indkøbskurv</button>
@@ -30,26 +30,26 @@
   <div class="flexbox-container-nedre-indkøbskurv">
 
   <div class="flexbox-container-selve-indkøbskurven">
-    <div th:each="order: ${orders}" class ="ordrer-box">
+    <div th:each="basket : ${basket}" class ="ordrer-box">
       <div class ="ordrer-information">
         <div class="ordrer-detaljer">
           <span>Topping:</span>
           <span>|</span>
           <span>Bund: </span><br><br>
-          <span th:text="${order.topping}"></span>
+          <span th:text="${basket.getTopping()}"></span>
           <span>-</span>
-          <span th:text="${order.bund}"></span>
+          <span th:text="${basket.getBottom()}"></span>
         </div>
       </div>
 
     </div>
-    <div th:each="order: ${orders}" class ="ordrer-box-antal">
+    <div th:each="basket: ${basket}" class ="ordrer-box-antal">
       <div class="ordrer-antal">
         <label for="antal">Antal:</label>
         <input type="number" id="antal" name="antal" min="1">
       </div>
     </div>
-    <div th:each="order: ${orders}" class ="ordrer-box-del">
+    <div th:each="basket: ${basket}" class ="ordrer-box-del">
       <div class="ordrer-del">
         <form class="ordrer-del-knap" th:action="@{/}" method="post">
           <button type="submit">X</button>
@@ -59,9 +59,9 @@
     </div>
   </div>
   <div class="flexbox-container-prisbox">
-    <p>Subtotal:</p>
-    <p>Levering:</p>
-    <p>Pris i alt:</p>
+    <span>Subtotal:</span><span th:text="${subtotal.getValue()}"></span>
+    <span>Levering:</span><span>40kr</span>
+    <span>Pris i alt:</span><span th:text="${total.getValue()}"></span>
     <form class="ordrer-betal-knap" th:action="@{/}" method="post">
       <button type="submit">Betal</button>
     </form>
