@@ -10,8 +10,6 @@ import io.javalin.http.HttpStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UserController {
     public static void addRoutes(Javalin app)
@@ -28,25 +26,18 @@ public class UserController {
     public static void serveIndexPage(Context ctx)
     {
         // FIXME: for debugging
-        Connection conn = null;
-        PreparedStatement ps;
-        ResultSet rs;
-        try {
-            conn = Server.db.connect();
-            String sql = "SELECT Toppings.name FROM Toppings";
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+        String sql = "SELECT Toppings.name FROM Toppings";
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 System.out.println(rs.getString("name"));
             }
         } catch (Exception e) {
-            System.err.println(e);
+            System.out.println(e.getMessage());
+            ctx.status(500);
             return;
-        } finally {
-            if (conn != null)
-                Server.db.close(conn);
         }
-
 
         ctx.attribute("user", ctx.sessionAttribute("user"));
         ctx.render(Path.Template.INDEX);

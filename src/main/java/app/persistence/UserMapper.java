@@ -36,13 +36,11 @@ public class UserMapper {
     {
         User user = null;
 
-        Connection conn = null;
         PreparedStatement ps;
         ResultSet rs;
         String sql = "SELECT users.id, users.email, users.password, users.salt, users.admin, users.balance FROM users WHERE users.email=?";
 
-        try {
-            conn = Server.db.connect();
+        try (Connection conn = Server.db.getConnection()){
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -62,9 +60,6 @@ public class UserMapper {
 
         } catch (Exception e) {
             System.err.println(e);
-        } finally {
-            if (conn != null)
-                Server.db.close(conn);
         }
 
         return user;
@@ -72,14 +67,12 @@ public class UserMapper {
 
     public static boolean register(String email, String password)
     {
-        Connection conn = null;
         PreparedStatement ps;
         ResultSet rs;
         String sqlQuery = "SELECT users.id FROM users WHERE users.email=?";
         String sqlUpdate = "INSERT INTO users (email, password, salt, balance, admin) VALUES(?, ?, ?, ?, ?)";
 
-        try {
-            conn = Server.db.connect();
+        try (Connection conn = Server.db.getConnection()){
             ps = conn.prepareStatement(sqlQuery);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -96,10 +89,8 @@ public class UserMapper {
             }
         } catch (Exception e) {
             System.err.println(e);
-        } finally {
-            if (conn != null)
-                Server.db.close(conn);
         }
+
         return false;
     }
 }
