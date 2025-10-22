@@ -45,17 +45,19 @@
       <div class="topping-dropdown">
         <button type="button" class="topping-button">Toppings ⬇</button>
         <div class="topping-content">
-          <label><input type="checkbox" name="topping" value="chocolate"> Chokolade</label>
-          <label><input type="checkbox" name="topping" value="vanilla"> Vanilje</label>
-          <label><input type="checkbox" name="topping" value="strawberry"> Jordbær</label>
+          <label th:each="topping : ${toppings}">
+            <input type="checkbox" name="topping" th:value="${topping}">
+            <span th:text="${topping}"></span>
+          </label>
         </div>
       </div>
       <div class="bund-dropdown">
         <button type="button" class="bund-button">Bund ⬇</button>
         <div class="bund-content">
-          <label><input type="checkbox" name="bund" value="Sandkage"> Sandkage</label>
-          <label><input type="checkbox" name="bund" value="Chokoladekage"> Chokoladekage</label>
-          <label><input type="checkbox" name="bund" value="Drømmekage"> Drømmekage</label>
+          <label th:each="bottom : ${bottoms}">
+            <input type="checkbox" name="bottom" th:value="${bottom}">
+            <span th:text="${bottom}"></span>
+          </label>
         </div>
       </div>
       <div class="antal-input">
