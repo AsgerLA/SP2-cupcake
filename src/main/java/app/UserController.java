@@ -1,6 +1,8 @@
 package app;
 
 import app.entities.Order;
+import app.entities.Topping;
+import app.entities.Bottom;
 import app.entities.User;
 import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
@@ -127,6 +129,8 @@ public class UserController {
     {
         User user;
         int count;
+        int topId;
+        int botId;
 
         try {
             user = ctx.sessionAttribute("user");
@@ -137,14 +141,26 @@ public class UserController {
             count = Integer.decode(Objects.requireNonNull(ctx.formParam("count")));
             if (count == 0)
                 throw new Exception();
+            topId = Integer.decode(ctx.formParam("topping"));
+            botId = Integer.decode(ctx.formParam("bottom"));
+            if (topId == 0 || botId == 0)
+                throw new Exception();
             List<Order> basket = ctx.sessionAttribute("basket");
             assert basket != null;
-            basket.add(new Order(0, "TEST", "TEST", count, 9.0));
+            List<Topping> tops = OrderMapper.getToppings();
+            double price = tops.get(topId-1).getPrice();
+            List<Bottom> bots = OrderMapper.getBottoms();
+            price += tops.get(topId-1).getPrice();
+            Order o = new Order(0, tops.get(topId-1).getName(), bots.get(botId-1).getName(), count, price);
+            o.topId = topId;
+            o.botId = botId;
+            basket.add(o);
             double subtotal = ctx.sessionAttribute("subtotal");
-            ctx.sessionAttribute("subtotal", subtotal+9*count);
+            ctx.sessionAttribute("subtotal", subtotal+price*count);
             ctx.redirect(Path.Web.INDEX);
         } catch (Exception e) {
             ctx.sessionAttribute("errmsg", "* Invalid order");
+            e.printStackTrace();
             ctx.redirect(Path.Web.INDEX);
         }
     }

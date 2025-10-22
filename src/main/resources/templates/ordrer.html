@@ -12,12 +12,12 @@
             <form class="header-menu" th:action="@{/login}" method="get">
                 <button class="button button-logpå">Log på</button>
             </form>
-            <form class="header-menu" th:action="@{/ordrer}" method="get">
+            <form class="header-menu" th:action="@{/orders}" method="get">
                 <button class="button button-ordrer">Ordrer</button>
             </form>
         </div>
         <div class="flexbox-item3and4-in-upperbanner">
-            <span th:text="${user.email}"></span> <!-- maybe currentuser instead? -->
+            <span th:text="${user.getEmail()}"></span> <!-- maybe currentuser instead? -->
             <form class="header-menu" th:action="@{/indkobskurv}" method="get">
                 <button class="button button-indkøbskurv">Indkøbskurv</button>
             </form>
@@ -32,15 +32,15 @@
     </div>
     <div class="flexbox-ordrer-data">
         <div class="ordre-række" th:each="order : ${orders}">
-            <span th:text="${order.id}"></span>
+            <span th:text="${order.getId()}"></span>
             <span>-</span>
-            <span th:text="${order.topping}"></span>
+            <span th:text="${order.getTopping()}"></span>
             <span>-</span>
-            <span th:text="${order.bottom}"></span>
+            <span th:text="${order.getBottom()}"></span>
             <span>-</span>
-            <span th:text="${antal}"></span>
+            <span th:text="${order.getCount()}"></span>
             <span>-</span>
-            <span th:text="${order.pris}"></span>
+            <span th:text="${order.getPrice()}"></span>
         </div>
 
     </div>

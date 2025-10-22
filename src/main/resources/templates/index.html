@@ -13,7 +13,7 @@
       <form class="header-menu" th:action="@{/login}" method="get">
         <button class="button button-logpå">Log på</button>
       </form>
-      <form class="header-menu" th:action="@{/ordrer}" method="get">
+      <form class="header-menu" th:action="@{/orders}" method="get">
         <button class="button button-ordrer">Ordrer</button>
       </form>
     </div>
@@ -49,7 +49,7 @@
         <button type="button" class="topping-button">Toppings ⬇</button>
         <div class="topping-content">
           <label th:each="topping : ${toppings}">
-            <input type="checkbox" name="topping" th:value="${topping}">
+            <input type="checkbox" name="topping" th:value="${topping.getId()}">
             <span th:text="${topping.getName()}"></span>
           </label>
         </div>
@@ -58,7 +58,7 @@
         <button type="button" class="bund-button">Bund ⬇</button>
         <div class="bund-content">
           <label th:each="bottom : ${bottoms}">
-            <input type="checkbox" name="bottom" th:value="${bottom}">
+            <input type="checkbox" name="bottom" th:value="${bottom.getId()}">
             <span th:text="${bottom.getName()}"></span>
           </label>
         </div>

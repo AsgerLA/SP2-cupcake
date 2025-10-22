@@ -17,6 +17,7 @@ public class Path {
     public static class Template {
         public static final String INDEX = "/index.html";
         public static final String LOGIN = "/login.html";
+        public static final String ORDERS = "/ordrer.html";
         public static final String BASKET = "/indkobskurv.html";
     }
 }

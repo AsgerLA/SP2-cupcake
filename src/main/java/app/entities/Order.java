@@ -6,6 +6,7 @@ public class Order {
     private String bottom;
     private int count;
     private double price;
+    public int topId, botId;
 
     public Order(int id, String topping, String bottom, int count, double price) {
         this.id = id;

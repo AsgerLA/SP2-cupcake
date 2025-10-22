@@ -20,7 +20,17 @@ public class OrderController {
 
     public static void serveOrdersPage(Context ctx)
     {
-        ctx.status(HttpStatus.NOT_IMPLEMENTED);
+        User user;
+        user = ctx.sessionAttribute("user");
+        if (user == null) {
+            ctx.redirect(Path.Web.LOGIN);
+            return;
+        }
+        ctx.attribute("user", user);
+        List<Order> orders = OrderMapper.getUserOrders(user.getId());
+        ctx.attribute("orders", orders);
+
+        ctx.render(Path.Template.ORDERS);
     }
 
     public static void handleOrderPost(Context ctx)
@@ -36,13 +46,12 @@ public class OrderController {
             }
             basket = ctx.sessionAttribute("basket");
             assert basket != null;
-            System.out.println("TODO: put basket into DB orders table");
+            OrderMapper.addUserOrders(user.getId(), basket);
             basket.clear();
-            ctx.redirect(Path.Web.INDEX);
+            ctx.redirect(Path.Web.BASKET);
         } catch (Exception e) {
             ctx.status(HttpStatus.BAD_REQUEST);
         }
-        ctx.status(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public static void handleRemoveOrderPost(Context ctx)
