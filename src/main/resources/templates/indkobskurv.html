@@ -49,9 +49,9 @@
         <p th:text="${basket.getCount()}"></p>
       </div>
     </div>
-    <div th:each="basket: ${basket}" class ="ordrer-box-del">
+    <div th:each="basket,iter: ${basket}" class ="ordrer-box-del">
       <div class="ordrer-del">
-        <form class="ordrer-del-knap" th:action="@{/remove-order/{id} (id=${basket.getId()})}" method="post">
+        <form class="ordrer-del-knap" th:action="@{/remove-basket/{id} (id=${iter.index})}" method="post">
           <button type="submit">X</button>
         </form>
 

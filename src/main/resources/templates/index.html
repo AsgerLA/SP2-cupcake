@@ -37,6 +37,9 @@
   <div class="flexbox-item-text1">
     <h1>Byg din cupcake!</h1>
   </div>
+  <th:block th:if="${errmsg != null}">
+    <p class="error" th:text="${errmsg}"></p>
+  </th:block>
   <div class="flexbox-item-text2">
     <h2>Vælg nedenfor:</h2>
   </div>

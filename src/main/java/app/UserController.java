@@ -26,6 +26,7 @@ public class UserController {
         app.post(Path.Web.LOGOUT, UserController::handleLogoutPost);
         app.post(Path.Web.REGISTER, UserController::handleRegisterPost);
         app.post(Path.Web.BASKET, UserController::handleBasketPost);
+        app.post(Path.Web.REMOVE_BASKET, UserController::handleRemoveBasketPost);
 
     }
 
@@ -49,7 +50,10 @@ public class UserController {
         ctx.attribute("bottoms", OrderMapper.getBottoms());
 
         ctx.attribute("user", ctx.sessionAttribute("user"));
+
+        ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
         ctx.render(Path.Template.INDEX);
+        ctx.sessionAttribute("errmsg", null);
     }
 
     public static void serveLoginPage(Context ctx)
@@ -60,6 +64,10 @@ public class UserController {
     }
 
     public static void serveBasketPage(Context ctx){
+        if (ctx.sessionAttribute("user") == null) {
+            ctx.redirect(Path.Web.LOGIN);
+            return;
+        }
         ctx.attribute("basket", ctx.sessionAttribute("basket"));
         ctx.attribute("subtotal", ctx.sessionAttribute("subtotal"));
         ctx.render(Path.Template.BASKET);
@@ -131,10 +139,36 @@ public class UserController {
                 throw new Exception();
             List<Order> basket = ctx.sessionAttribute("basket");
             assert basket != null;
-            basket.add(new Order(user.getId(), "TEST", "TEST", count, 9.0));
+            basket.add(new Order(0, "TEST", "TEST", count, 9.0));
             double subtotal = ctx.sessionAttribute("subtotal");
-            ctx.sessionAttribute("subtotal", subtotal+9);
+            ctx.sessionAttribute("subtotal", subtotal+9*count);
             ctx.redirect(Path.Web.INDEX);
+        } catch (Exception e) {
+            ctx.sessionAttribute("errmsg", "* Invalid order");
+            ctx.redirect(Path.Web.INDEX);
+        }
+    }
+
+    public static void handleRemoveBasketPost(Context ctx)
+    {
+        User user;
+        int id;
+
+        try {
+            user = ctx.sessionAttribute("user");
+            if (user == null) {
+                ctx.redirect(Path.Web.LOGIN);
+                return;
+            }
+            id = Integer.decode(ctx.pathParam("id"));
+            List<Order> basket = ctx.sessionAttribute("basket");
+            assert basket != null;
+            double subtotal = ctx.sessionAttribute("subtotal");
+            Order o = basket.get(id);
+            subtotal -= o.getPrice()*o.getCount();
+            basket.remove(id);
+            ctx.sessionAttribute("subtotal", subtotal);
+            ctx.redirect(Path.Web.BASKET);
         } catch (Exception e) {
             ctx.status(HttpStatus.BAD_REQUEST);
         }
