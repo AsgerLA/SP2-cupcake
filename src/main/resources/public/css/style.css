@@ -68,7 +68,7 @@ body{
 .button-like-text:hover {
   cursor: default;
 }
-.flexbox-item-picture\&logo{
+.flexbox-item-picture{
   display: flex;
   background-color: grey;
   width: 100%;
@@ -327,3 +327,101 @@ width: 120%;
   width:100%;
   height:70%;
 }
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* index html */
+
+
+  .flexbox-container{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height:100vh;
+  justify-content: flex-start;
+  align-content: center;
+}
+  .flexbox-item-upperbanner{
+    display: flex;
+    width:100%;
+    height: 60px;
+    background-color: darksalmon;
+    justify-content: space-between;
+  }
+  .flexbox-item1and2-in-upperbanner{
+    display: flex;
+    flex-direction: row;
+    height:7%;
+    justify-content: flex-start;
+
+  }
+  .flexbox-item-admin-box{
+    display: none;
+  }
+  .flexbox-item-picture{
+    display: flex;
+    background-color: grey;
+    width: 100%;
+    height: 20vh;
+    justify-content: center;
+  }
+  .flexbox-item-picture img{
+    width: 90%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .flexbox-item-text1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .flexbox-item-text1 h1{
+    margin-left: 2%;
+    font-size: 72px;
+  }
+  .flexbox-item-text2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .flexbox-item-text2 h2{
+    margin-top: -35px;
+    margin-left: 2%;
+    font-size: 48px;
+  }
+  .flexbox-item-inputfields{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+    background-color: red;
+  }
+
+  .topping-dropdown{
+    margin-left: 40vw;
+    margin-right: 40vw;
+  }
+  .bund-dropdown{
+    margin-left: 40vw;
+    margin-right: 42vw;
+  }
+  .bund-button{
+
+  }
+}
+
