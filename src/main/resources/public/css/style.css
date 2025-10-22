@@ -456,10 +456,69 @@ body{
     font-size: clamp(24px,72px,72px);
     margin-left: 2%;
   }
+}
 
+@media(max-width: 1029px){
   /* indkobskurv.html */
 
-
-
+  .flexbox-container-nedre-indkøbskurv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height:100vh;
+    background-color: grey;
+  }
+  .indkøbs-h1{
+    margin-top: 30px;
+    font-size: 48px;
+  }
+  .flexbox-container-indkøbskurv{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height:100vh;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: grey;
+  }
+  .flexbox-container-nedre-indkøbskurv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height:100vh;
+    background-color: grey;
+  }
+  .flexbox-container-selve-indkøbskurven{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+    width: 94%;
+    height: 120%;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  .ordrer-box{
+    margin-top: 10px;
+    margin-right: 7px;
+    padding-bottom: 10px;
+    background-color: darksalmon;
+    width: 100%;
+    height: 100%;
+  }
+  .samlet-ordrer-box{
+    display: flex;
+    width: 100%;
+    height: 15%;
+    margin-bottom: 10px;
+  }
+  .flexbox-container-prisbox span{
+    margin-left: -75px;
+    font-size: 22px;
+    margin-right: 0;
+  }
 }
 
