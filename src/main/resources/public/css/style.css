@@ -313,6 +313,18 @@ body{
 .flexbox-item-ordreinfo span{
   font-size: 3.5vw;
 }
+.ordre-række{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: lightgrey;
+  width: 100%;
+}
+.ordre-række span{
+  font-size:20px;
+  margin-right: 100px;
+}
 .flexbox-container-ordrer{
   display: flex;
   flex-direction: column;
@@ -340,13 +352,16 @@ body{
 }
 .flexbox-ordrer-data{
   display: flex;
+  flex-direction: column;
   background-color: lightgrey;
-  width:100%;
+  width:100vw;
   height:70%;
 }
 .flexbox-ordrer-data span{
   font-size: 3.5vw;
+  margin-right: 100px;
 }
+
 /* --------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------- */
@@ -379,6 +394,8 @@ body{
     height: 60px;
     background-color: darksalmon;
     justify-content: space-between;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   .flexbox-item1and2-in-upperbanner{
     display: flex;
