@@ -30,6 +30,7 @@
   <div class="flexbox-container-nedre-indkøbskurv">
 
   <div class="flexbox-container-selve-indkøbskurven">
+    <div th:each="basket:${basket}" class="samlet-ordrer-box">
     <div th:each="basket : ${basket}" class ="ordrer-box">
       <div class ="ordrer-information">
         <div class="ordrer-detaljer">
@@ -55,6 +56,7 @@
         </form>
 
       </div>
+    </div>
     </div>
   </div>
   <div class="flexbox-container-prisbox">
