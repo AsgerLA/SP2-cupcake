@@ -38,6 +38,11 @@ public class Server {
             config.staticFiles.add("/public");
         });
 
+        app.exception(Exception.class, (e, ctx) -> {
+            e.printStackTrace();
+            ctx.status(500);
+        });
+
         UserController.addRoutes(app);
         OrderController.addRoutes(app);
 

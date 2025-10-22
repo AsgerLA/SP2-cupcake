@@ -18,13 +18,13 @@
       </form>
     </div>
     <div class="flexbox-item-admin-box">
-      <form class ="header-menu" th:action="@{/admin}" method="get">
+      <form class="header-menu" th:action="@{/admin}" method="get">
         <button class="button button-admin">Admin</button>
       </form>
     </div>
     <div class="flexbox-item3and4-in-upperbanner">
-      <th:block th:if="${user != null}">
-        <span th:text="${user.email}"></span>
+      <th:block th:if="${user} != null">
+        <span th:text="${user.getEmail()}"></span>
       </th:block>
       <form class="header-menu" th:action="@{/indkobskurv}" method="get">
         <button class="button button-indkøbskurv">Indkøbskurv</button>
