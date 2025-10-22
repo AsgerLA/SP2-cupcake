@@ -390,7 +390,7 @@ width: 120%;
   }
   .flexbox-item-text1 h1{
     margin-left: 2%;
-    font-size: 72px;
+    font-size: clamp(62px, 72px, 72px);
   }
   .flexbox-item-text2{
     display: flex;
@@ -400,16 +400,16 @@ width: 120%;
   .flexbox-item-text2 h2{
     margin-top: -35px;
     margin-left: 2%;
-    font-size: 48px;
+    font-size: clamp(32px, 48px, 48px);
   }
   .flexbox-item-inputfields{
     display: flex;
-    flex-wrap: wrap;
+
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
     height: 50%;
-    background-color: red;
+    background-color: darksalmon;
   }
 
   .topping-dropdown{
@@ -420,7 +420,20 @@ width: 120%;
     margin-left: 40vw;
     margin-right: 42vw;
   }
-  .bund-button{
+  .antal-input{
+    margin-left: 40vw;
+    margin-right: 35vw;
+  }
+  .flexbox-item-buttonforbasket{
+    margin-left: 40vw;
+    margin-right: 40vw;
+  }
+
+
+
+  /* login.html */
+
+  .flexbox-item-text1-login{
 
   }
 }
