@@ -8,7 +8,6 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
 import java.util.List;
-import java.util.Objects;
 
 public class OrderController {
     public static void addRoutes(Javalin app)
@@ -23,6 +22,7 @@ public class OrderController {
         User user;
         user = ctx.sessionAttribute("user");
         if (user == null) {
+            ctx.sessionAttribute("loginredirect", Path.Web.ORDERS);
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
@@ -41,6 +41,7 @@ public class OrderController {
         try {
             user = ctx.sessionAttribute("user");
             if (user == null) {
+                ctx.sessionAttribute("loginredirect", Path.Web.BASKET);
                 ctx.redirect(Path.Web.LOGIN);
                 return;
             }

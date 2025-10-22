@@ -67,6 +67,7 @@ public class UserController {
 
     public static void serveBasketPage(Context ctx){
         if (ctx.sessionAttribute("user") == null) {
+            ctx.sessionAttribute("loginredirect", Path.Web.BASKET);
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
@@ -78,6 +79,7 @@ public class UserController {
     public static void handleLoginPost(Context ctx)
     {
         User user;
+        String redirect = ctx.sessionAttribute("loginredirect");
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
         if (email == null || password == null) {
@@ -98,6 +100,11 @@ public class UserController {
         ctx.sessionAttribute("user", user);
         ctx.sessionAttribute("basket", new ArrayList<>());
         ctx.sessionAttribute("subtotal", 0.0);
+        if (redirect != null) {
+            ctx.sessionAttribute("loginredirect", null);
+            ctx.redirect(redirect);
+            return;
+        }
         ctx.redirect(Path.Web.INDEX);
     }
 
@@ -135,6 +142,7 @@ public class UserController {
         try {
             user = ctx.sessionAttribute("user");
             if (user == null) {
+                ctx.sessionAttribute("loginredirect", Path.Web.INDEX);
                 ctx.redirect(Path.Web.LOGIN);
                 return;
             }
@@ -173,6 +181,7 @@ public class UserController {
         try {
             user = ctx.sessionAttribute("user");
             if (user == null) {
+                ctx.sessionAttribute("loginredirect", Path.Web.ORDERS);
                 ctx.redirect(Path.Web.LOGIN);
                 return;
             }
