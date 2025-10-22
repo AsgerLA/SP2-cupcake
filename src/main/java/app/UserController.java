@@ -61,6 +61,7 @@ public class UserController {
 
     public static void serveBasketPage(Context ctx){
         ctx.attribute("basket", ctx.sessionAttribute("basket"));
+        ctx.attribute("subtotal", ctx.sessionAttribute("subtotal"));
         ctx.render(Path.Template.BASKET);
     }
 
@@ -86,6 +87,7 @@ public class UserController {
         }
         ctx.sessionAttribute("user", user);
         ctx.sessionAttribute("basket", new ArrayList<>());
+        ctx.sessionAttribute("subtotal", 0.0);
         ctx.redirect(Path.Web.INDEX);
     }
 
@@ -129,7 +131,9 @@ public class UserController {
                 throw new Exception();
             List<Order> basket = ctx.sessionAttribute("basket");
             assert basket != null;
-            basket.add(new Order(user.getId(), "TEST", "TEST", count, 0.0));
+            basket.add(new Order(user.getId(), "TEST", "TEST", count, 9.0));
+            double subtotal = ctx.sessionAttribute("subtotal");
+            ctx.sessionAttribute("subtotal", subtotal+9);
             ctx.redirect(Path.Web.INDEX);
         } catch (Exception e) {
             ctx.status(HttpStatus.BAD_REQUEST);

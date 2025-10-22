@@ -50,7 +50,7 @@
     </div>
     <div th:each="basket: ${basket}" class ="ordrer-box-del">
       <div class="ordrer-del">
-        <form class="ordrer-del-knap" th:action="@{/}" method="post">
+        <form class="ordrer-del-knap" th:action="@{/remove-order/{id} (id=${basket.getId()})}" method="post">
           <button type="submit">X</button>
         </form>
 
@@ -58,10 +58,10 @@
     </div>
   </div>
   <div class="flexbox-container-prisbox">
-    <span>Subtotal:</span><span th:text="${subtotal.getValue()}"></span><br>
-    <span>Levering:</span><span>40kr</span><br>
-    <span>Pris i alt:</span><span th:text="${total.getValue()}"></span><br>
-    <form class="ordrer-betal-knap" th:action="@{/}" method="post">
+    <span>Subtotal:</span><span th:text="${subtotal}"></span>
+    <span>Levering:</span><span>40kr</span>
+    <span>Pris i alt:</span><span th:text="${subtotal+40}"></span>
+    <form class="ordrer-betal-knap" th:action="@{/order}" method="post">
       <button type="submit">Betal</button>
     </form>
   </div>
