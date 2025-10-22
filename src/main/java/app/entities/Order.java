@@ -4,12 +4,14 @@ public class Order {
     private int id;
     private String topping;
     private String bottom;
+    private int count;
     private double price;
 
-    public Order(int id, String topping, String bottom, double price) {
+    public Order(int id, String topping, String bottom, int count, double price) {
         this.id = id;
         this.topping = topping;
         this.bottom = bottom;
+        this.count = count;
         this.price = price;
     }
 
@@ -35,6 +37,10 @@ public class Order {
 
     public void setBottom(String bottom) {
         this.bottom = bottom;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public double getPrice() {

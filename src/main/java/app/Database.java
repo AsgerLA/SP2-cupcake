@@ -6,14 +6,15 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.SQLException;
 import java.sql.Connection;
 
-public class Database  {
+public class Database {
 
-    private static HikariConfig config = new HikariConfig();
-    private static HikariDataSource ds;
+    private final HikariDataSource ds;
 
     public Database(String username, String password, String url)
             throws SQLException
     {
+        HikariConfig config;
+        config = new HikariConfig();
         config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);

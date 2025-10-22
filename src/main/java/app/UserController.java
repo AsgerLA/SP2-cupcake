@@ -1,6 +1,7 @@
 package app;
 
 import app.entities.User;
+import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
 
 import io.javalin.Javalin;
@@ -38,6 +39,9 @@ public class UserController {
             ctx.status(500);
             return;
         }
+
+        ctx.attribute("toppings", OrderMapper.getToppings());
+        ctx.attribute("bottoms", OrderMapper.getBottoms());
 
         ctx.attribute("user", ctx.sessionAttribute("user"));
         ctx.render(Path.Template.INDEX);
