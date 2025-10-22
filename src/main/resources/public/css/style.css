@@ -280,17 +280,19 @@ body{
 .bund-dropdown:hover .bund-content{
   display: block;
 }
-.flexbox-item-ordreinfo h1{
 
-  font-size: 96px;
-width: 120%;
+.flexbox-item-ordreinfo-h1-box{
+  display:flex;
+  background-color: grey;
+  font-size: 48px;
+  width: 100%;
 }
 .flexbox-item-ordreinfo{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  background-color: yellow;
+  background-color: darkgrey;
   padding-right: 100px;
 }
 .flexbox-item-ordreinfo span{
@@ -323,7 +325,7 @@ width: 120%;
 }
 .flexbox-ordrer-data{
   display: flex;
-  background-color: red;
+  background-color: lightgrey;
   width:100%;
   height:70%;
 }
@@ -433,8 +435,9 @@ width: 120%;
 
   /* login.html */
 
-  .flexbox-item-text1-login{
-
+  .flexbox-item-text1-login h1{
+    font-size: clamp(24px,72px,72px);
+    margin-left: 2%;
   }
 }
 

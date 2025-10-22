@@ -47,7 +47,7 @@
         <div class="topping-content">
           <label th:each="topping : ${toppings}">
             <input type="checkbox" name="topping" th:value="${topping}">
-            <span th:text="${topping}"></span>
+            <span th:text="${topping.getName()}"></span>
           </label>
         </div>
       </div>
@@ -56,7 +56,7 @@
         <div class="bund-content">
           <label th:each="bottom : ${bottoms}">
             <input type="checkbox" name="bottom" th:value="${bottom}">
-            <span th:text="${bottom}"></span>
+            <span th:text="${bottom.getName()}"></span>
           </label>
         </div>
       </div>
