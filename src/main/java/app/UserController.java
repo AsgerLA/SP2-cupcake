@@ -1,5 +1,6 @@
 package app;
 
+import app.entities.Order;
 import app.entities.User;
 import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
@@ -11,6 +12,9 @@ import io.javalin.http.HttpStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class UserController {
     public static void addRoutes(Javalin app)
@@ -21,6 +25,7 @@ public class UserController {
         app.post(Path.Web.LOGIN, UserController::handleLoginPost);
         app.post(Path.Web.LOGOUT, UserController::handleLogoutPost);
         app.post(Path.Web.REGISTER, UserController::handleRegisterPost);
+        app.post(Path.Web.BASKET, UserController::handleBasketPost);
 
     }
 
@@ -55,9 +60,8 @@ public class UserController {
     }
 
     public static void serveBasketPage(Context ctx){
-        ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
+        ctx.attribute("basket", ctx.sessionAttribute("basket"));
         ctx.render(Path.Template.BASKET);
-        ctx.sessionAttribute("errmsg", null);
     }
 
     public static void handleLoginPost(Context ctx)
@@ -81,12 +85,14 @@ public class UserController {
             return;
         }
         ctx.sessionAttribute("user", user);
+        ctx.sessionAttribute("basket", new ArrayList<>());
         ctx.redirect(Path.Web.INDEX);
     }
 
     public static void handleLogoutPost(Context ctx)
     {
         ctx.sessionAttribute("user", null);
+        ctx.sessionAttribute("basket", null);
         ctx.redirect(Path.Web.INDEX);
     }
 
@@ -105,5 +111,28 @@ public class UserController {
             return;
         }
         ctx.redirect(Path.Web.LOGIN);
+    }
+
+    public static void handleBasketPost(Context ctx)
+    {
+        User user;
+        int count;
+
+        try {
+            user = ctx.sessionAttribute("user");
+            if (user == null) {
+                ctx.redirect(Path.Web.LOGIN);
+                return;
+            }
+            count = Integer.decode(Objects.requireNonNull(ctx.formParam("count")));
+            if (count == 0)
+                throw new Exception();
+            List<Order> basket = ctx.sessionAttribute("basket");
+            assert basket != null;
+            basket.add(new Order(user.getId(), "TEST", "TEST", count, 0.0));
+            ctx.redirect(Path.Web.INDEX);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+        }
     }
 }
