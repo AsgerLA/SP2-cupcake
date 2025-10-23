@@ -53,7 +53,7 @@
         <div class="topping-dropdown">
             <button type="button" class="topping-button">Toppings ⬇</button>
             <div class="topping-content">
-                <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${iter.index})}" method="post">
+                <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${topping.getId()})}" method="post">
                     <label th:each="topping : ${toppings}">
                         <button type="submit">X</button>
                         <span th:text="${topping.getName()}"></span>
@@ -64,7 +64,7 @@
         <div class="bund-dropdown">
             <button type="button" class="bund-button">Bund ⬇</button>
                 <div class="bund-content">
-                    <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${iter.index})}" method="post">
+                    <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${bottom.getId()})}" method="post">
                         <label th:each="bottom : ${bottoms}">
                             <button type="submit">X</button>
                             <span th:text="${bottom.getName()}"></span>
