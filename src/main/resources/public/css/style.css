@@ -227,6 +227,7 @@ body{
 .bund-dropdown{
   position: relative;
   display: inline-block;
+
 }
 
 /* Selve dropdown knappen er stylet her */
@@ -416,6 +417,30 @@ body{
   margin-left: 200px;
   margin-right:100px;
   align-items: center;
+}
+.bund-del-knap button{
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 8px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: darkgray;
+}
+.topping-del-knap button{
+  border: none;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 8px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: darkgray;
 }
 
 /* --------------------------------------------------------------------------------------------------------- */

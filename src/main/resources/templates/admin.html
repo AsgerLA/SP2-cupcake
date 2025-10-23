@@ -50,6 +50,29 @@
                 </div>
             </div>
         </div>
+        <div class="topping-dropdown">
+            <button type="button" class="topping-button">Toppings ⬇</button>
+            <div class="topping-content">
+                <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${iter.index})}" method="post">
+                    <label th:each="topping : ${toppings}">
+                        <button type="submit">X</button>
+                        <span th:text="${topping.getName()}"></span>
+                    </label>
+                </form>
+            </div>
+        </div>
+        <div class="bund-dropdown">
+            <button type="button" class="bund-button">Bund ⬇</button>
+                <div class="bund-content">
+                    <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${iter.index})}" method="post">
+                        <label th:each="bottom : ${bottoms}">
+                            <button type="submit">X</button>
+                            <span th:text="${bottom.getName()}"></span>
+                        </label>
+                    </form>
+                 </div>
+        </div>
     </div>
+
 </body>
 </html>
