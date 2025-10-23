@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class UserMapper {
 
@@ -92,5 +94,28 @@ public class UserMapper {
         }
 
         return false;
+    }
+
+    public static List<User> getUsers()
+    {
+        ResultSet rs;
+        String sql = "SELECT users.id, users.email, users.balance, users.admin FROM users";
+        List<User> users = new ArrayList<>();
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getDouble("balance"),
+                        rs.getBoolean("admin")));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return users;
     }
 }

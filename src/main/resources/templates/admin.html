@@ -26,18 +26,18 @@
         </div>
         <div class="flexbox-admin-kundedata">
             <div class="flexbox-admin-kundedata-styling">
-                <div class="kunde-række" th:each="user : ${Users}">
+                <div class="kunde-række" th:each="user : ${users}">
                     <span th:text="${user.getEmail()}"></span>
                     <span>-</span>
-                    <span th:text="${user.getID()}"></span>
+                    <span th:text="${user.getId()}"></span>
                     <span>-</span>
                     <span th:text="${user.getBalance()}"></span>
                     <span>-</span>
-                    <form class="admin-kundedel-knap" th:action="@{/remove-user/{id} (id=${iter.index})}" method="post">
+                    <form class="admin-kundedel-knap" th:action="@{/remove-user/{id} (id=${user.getId()})}" method="post">
                         <button type="submit">Del</button>
                     </form>
 
-                    <form class="admin-kundebalance-knap" th:action="@{/updateBalance-user/{id} (id=${iter.index})}" method="post">
+                    <form class="admin-kundebalance-knap" th:action="@{/updateBalance-user/{id} (id=${user.getId()})}" method="post">
                         <div class="balance-input">
                             <label for="balance"></label>
                             <input type="number" id="balance" name="balance" placeholder="Indtast balance her">

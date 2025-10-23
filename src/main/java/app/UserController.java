@@ -71,6 +71,9 @@ public class UserController {
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
+
+        ctx.attribute("users", UserMapper.getUsers());
+
         ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
         ctx.render(Path.Template.ADMIN);
         ctx.sessionAttribute("errmsg", null);
