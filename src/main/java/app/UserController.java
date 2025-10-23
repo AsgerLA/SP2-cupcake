@@ -61,11 +61,15 @@ public class UserController {
 
     public static void serveBasketPage(Context ctx)
     {
-        if (ctx.sessionAttribute("user") == null) {
+        User user;
+
+        user = ctx.sessionAttribute("user");
+        if (user == null) {
             ctx.sessionAttribute("loginredirect", Path.Web.BASKET);
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
+        ctx.attribute("user", user);
         ctx.attribute("basket", ctx.sessionAttribute("basket"));
         ctx.attribute("subtotal", ctx.sessionAttribute("subtotal"));
 
@@ -75,11 +79,16 @@ public class UserController {
     }
     public static void serveAdminPage(Context ctx)
     {
-        if (ctx.sessionAttribute("user") == null) {
+        User user;
+
+        user = ctx.sessionAttribute("user");
+        if (user == null) {
             ctx.sessionAttribute("loginredirect", Path.Web.ADMIN);
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
+
+        ctx.attribute("user", user);
         ctx.attribute("toppings", Server.AppData.toppings);
         ctx.attribute("bottoms", Server.AppData.bottoms);
 
