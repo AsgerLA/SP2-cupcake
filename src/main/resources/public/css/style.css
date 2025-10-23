@@ -442,6 +442,23 @@ body{
   cursor: pointer;
   background-color: darkgray;
 }
+.flexbox-admin-indsættelseAndButton-field-styling{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  width: 100vw;
+}
+.bund-dropdown{
+  margin-right: 55%;
+}
+.insert-topping-bottom-field-admin{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  gap: 50px;
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------- */

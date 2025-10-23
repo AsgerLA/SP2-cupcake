@@ -50,31 +50,47 @@
                 </div>
             </div>
         </div>
-        <div class="topping-dropdown">
-            <button type="button" class="topping-button">Toppings ⬇</button>
-            <div class="topping-content">
-                <div th:each="topping : ${toppings}">
-                    <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${topping.getId()})}" method="post">
-
-                            <button type="submit">X</button>
-                            <span th:text="${topping.getName()}"></span>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="bund-dropdown">
-            <button type="button" class="bund-button">Bund ⬇</button>
-                <div class="bund-content">
-                    <div th:each="bottom : ${bottoms}">
-                        <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${bottom.getId()})}" method="post">
-
-                            <button type="submit">X</button>
-                            <span th:text="${bottom.getName()}"></span>
-
+        <div class="flexbox-admin-indsættelseAndButton-field-styling">
+            <div class="topping-dropdown">
+                <button type="button" class="topping-button">Toppings ⬇</button>
+                <div class="topping-content">
+                    <div th:each="topping : ${toppings}">
+                        <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${topping.getId()})}" method="post">
+                                <button type="submit">X</button>
+                                <span th:text="${topping.getName()}"></span>
                         </form>
                     </div>
-                 </div>
+                </div>
+            </div>
+            <div class="bund-dropdown">
+                <button type="button" class="bund-button">Bund ⬇</button>
+                    <div class="bund-content">
+                        <div th:each="bottom : ${bottoms}">
+                            <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${bottom.getId()})}" method="post">
+
+                                <button type="submit">X</button>
+                                <span th:text="${bottom.getName()}"></span>
+
+                            </form>
+                        </div>
+                     </div>
+            </div>
+                <form action="/database" method="POST">
+                    <div class="insert-topping-bottom-field-admin">
+                    <div class="topping-input-admin">
+                        <label for="topping-indsættelse"></label>
+                        <input type="text" id="topping-indsættelse" placeholder="Indsæt topping her:">
+                    </div>
+                    <div class="bottom-input-admin">
+                        <label for="bottom-indsættelse"></label>
+                        <input type="text" id="bottom-indsættelse" placeholder="Indsæt bund her:">
+                    </div>
+                    <div class="flexbox-item-button-indsættelse">
+                        <button type="submit">Gem</button>
+                    </div>
+                    </div>
+                </form>
+
         </div>
     </div>
 
