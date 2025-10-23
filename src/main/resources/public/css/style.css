@@ -361,6 +361,62 @@ body{
   font-size: 3.5vw;
   margin-right: 100px;
 }
+.flexbox-item-admin-h1-box{
+  display:flex;
+  background-color: grey;
+  font-size: 42px;
+  width: 100%;
+}
+.flexbox-item-admininfo{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: darkgrey;
+  gap: 100px;
+
+
+}
+.flexbox-item-admininfo span{
+  font-size: 2.5vw;
+
+}
+.flexbox-admin-kundedata{
+  display: flex;
+  flex-direction: column;
+  background-color: lightgrey;
+  width:100vw;
+  height:70%;
+}
+.flexbox-admin-kundedata span{
+  font-size: 3.5vw;
+  margin-right: 100px;
+}
+.flexbox-admin-kundedata-styling{
+  display: flex;
+  flex-direction: row;
+  background-color: lightgrey;
+  width:100%;
+}
+.kunde-række{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.admin-kundebalance-knap{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 50px;
+}
+.admin-kundedel-knap{
+  display: flex;
+  margin-left: 200px;
+  margin-right:100px;
+  align-items: center;
+}
 
 /* --------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------- */
