@@ -3,7 +3,6 @@ package app;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.sql.SQLException;
 import java.sql.Connection;
 
 public class Database {
@@ -11,7 +10,7 @@ public class Database {
     private final HikariDataSource ds;
 
     public Database(String username, String password, String url)
-            throws SQLException
+            throws Exception
     {
         HikariConfig config;
         config = new HikariConfig();

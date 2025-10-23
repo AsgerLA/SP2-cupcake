@@ -10,6 +10,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Server {
 
@@ -28,7 +29,7 @@ public class Server {
         Javalin app;
         try {
             db = new Database(USERNAME, PASSWORD, URL);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Failed to connect to db");
             System.exit(1);
         }
@@ -66,5 +67,15 @@ public class Server {
         AppData.bottoms = OrderMapper.getBottoms();
 
         app.start(8000);
+
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            String line = scan.nextLine();
+            if (line.equals("stop")) {
+                System.out.println("Stopping server");
+                break;
+            }
+        }
+        app.stop();
     }
 }
