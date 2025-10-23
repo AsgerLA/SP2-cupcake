@@ -27,6 +27,9 @@
     </div>
   </div>
   <h1 class="indkøbs-h1">Din indkøbskurv:</h1>
+  <th:block th:if="${errmsg} != null">
+    <p class="error" th:text="${errmsg}"></pt>
+  </th:block>
   <div class="flexbox-container-nedre-indkøbskurv">
 
   <div class="flexbox-container-selve-indkøbskurven">

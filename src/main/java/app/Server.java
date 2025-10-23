@@ -1,11 +1,15 @@
 package app;
 
+import app.entities.Bottom;
+import app.entities.Topping;
+import app.persistence.OrderMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Server {
 
@@ -13,6 +17,11 @@ public class Server {
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/cupcake?currentSchema=public";
     public static Database db;
+
+    public static class AppData {
+        public static List<Topping> toppings = null;
+        public static List<Bottom> bottoms = null;
+    }
 
     public static void main(String[] args)
     {
@@ -45,6 +54,9 @@ public class Server {
 
         UserController.addRoutes(app);
         OrderController.addRoutes(app);
+
+        AppData.toppings = OrderMapper.getToppings();
+        AppData.bottoms = OrderMapper.getBottoms();
 
         app.start(8000);
     }

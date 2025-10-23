@@ -20,6 +20,7 @@ public class OrderController {
     public static void serveOrdersPage(Context ctx)
     {
         User user;
+
         user = ctx.sessionAttribute("user");
         if (user == null) {
             ctx.sessionAttribute("loginredirect", Path.Web.ORDERS);
@@ -27,8 +28,7 @@ public class OrderController {
             return;
         }
         ctx.attribute("user", user);
-        List<Order> orders = OrderMapper.getUserOrders(user.getId());
-        ctx.attribute("orders", orders);
+        ctx.attribute("orders", OrderMapper.getUserOrders(user.getId()));
 
         ctx.render(Path.Template.ORDERS);
     }
@@ -37,12 +37,19 @@ public class OrderController {
     {
         User user;
         List<Order> basket;
+        double subtotal;
 
         try {
             user = ctx.sessionAttribute("user");
             if (user == null) {
                 ctx.sessionAttribute("loginredirect", Path.Web.BASKET);
                 ctx.redirect(Path.Web.LOGIN);
+                return;
+            }
+            subtotal = ctx.sessionAttribute("subtotal");
+            if (subtotal > user.getBalance()) {
+                ctx.sessionAttribute("errmsg", "* insufficient funds");
+                ctx.redirect(Path.Web.BASKET);
                 return;
             }
             basket = ctx.sessionAttribute("basket");
