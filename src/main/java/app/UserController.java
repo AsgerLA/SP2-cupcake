@@ -31,6 +31,15 @@ public class UserController {
 
     }
 
+    public static void serveErrorPage(Context ctx)
+    {
+        HttpStatus status = ctx.status();
+        ctx.attribute("errorCode", status.getCode());
+        ctx.attribute("errorDesc", status.getMessage());
+        ctx.status(status.getCode());
+        ctx.render(Path.Template.ERROR);
+    }
+
     public static void serveIndexPage(Context ctx)
     {
         ctx.attribute("toppings", Server.AppData.toppings);

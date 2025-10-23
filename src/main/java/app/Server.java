@@ -47,6 +47,13 @@ public class Server {
             config.staticFiles.add("/public");
         });
 
+        app.error(404, UserController::serveErrorPage);
+        app.exception(java.io.FileNotFoundException.class, (e, ctx) -> {
+            ctx.status(404);
+        });
+        app.exception(org.thymeleaf.exceptions.TemplateInputException.class, (e, ctx) -> {
+            ctx.status(404);
+        });
         app.exception(Exception.class, (e, ctx) -> {
             e.printStackTrace();
             ctx.status(500);
