@@ -71,6 +71,8 @@ public class UserController {
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
+        ctx.attribute("toppings", Server.AppData.toppings);
+        ctx.attribute("bottoms", Server.AppData.bottoms);
 
         ctx.attribute("users", UserMapper.getUsers());
 
