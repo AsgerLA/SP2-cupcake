@@ -8,14 +8,8 @@
 <body>
     <div class="flexbox-container-admin-mainpage">
         <div class="flexbox-item-upperbanner">
-            <div class="flexbox-item1and2-in-upperbanner">
-                <form class="header-menu" th:action="@{/login}" method="get">
-                    <button class="button button-logpå">Log på</button>
-                </form>
-                <form class="header-menu" th:action="@{/orders}" method="get">
-                    <button class="button button-ordrer">Ordrer</button>
-                </form>
-            </div>
+            <th:block th:insert="~{/fragments.html :: header}"></th:block>
+            <th:block th:insert="~{/fragments.html :: admin}"></th:block>
             <div class="flexbox-item3and4-in-upperbanner">
                 <span>Du er i admin-view</span>
                 <form class="header-menu" th:action="@{/kunder}" method="get">

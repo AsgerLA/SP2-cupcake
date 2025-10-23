@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<body>
+<div th:fragment="header">
+    <div class="flexbox-item1and2-in-upperbanner">
+        <div class="header-menu" th:if="${user} != null">
+            <form action="/logout" method="POST">
+                <button class="button button-logpå" type="submit">Log ud</button>
+            </form>
+        </div>
+        <div class="header-menu" th:if="${user} == null">
+            <a href="/login">
+                <button class="button button-logpå" type="button">Log på</button>
+            </a>
+        </div>
+        <a class="header-menu" href="/orders">
+            <button class="button button-ordrer" type="button">Ordrer</button>
+        </a>
+    </div>
+</div>
+<div th:fragment="admin">
+    <div class="flexbox-item-admin-box">
+        <form class="header-menu" th:action="@{/admin}" method="get">
+            <button class="button button-admin">Admin</button>
+        </form>
+    </div>
+</div>
+<div th:fragment="user">
+    <th:block th:if="${user} != null">
+        <span th:text="${user.getEmail()}"></span>
+        <span th:text="${user.getBalance()}"></span>
+    </th:block>
+</div>
+</body>
+</html>

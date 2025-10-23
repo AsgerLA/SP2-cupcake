@@ -9,20 +9,11 @@
 
 <div class="flexbox-container-indkøbskurv">
   <div class="flexbox-item-upperbanner">
-    <div class="flexbox-item1and2-in-upperbanner">
-      <form class="header-menu" th:action="@{/login}" method="get">
-        <button class="button button-logpå">Log på</button>
-      </form>
-      <form class="header-menu" th:action="@{/orders}" method="get">
-        <button class="button button-ordrer">Ordrer</button>
-      </form>
-    </div>
+    <th:block th:insert="~{/fragments.html :: header}"></th:block>
     <div class="flexbox-item3and4-in-upperbanner">
-      <th:block th:if="${user} != null">
-        <span th:text="${user.getEmail()}"></span>
-      </th:block>
-      <form class="header-menu" th:action="@{/indkobskurv}" method="get">
-        <button class="button button-indkøbskurv">Indkøbskurv</button>
+      <th:block th:insert="~{/fragments.html :: user}"></th:block>
+      <form class="header-menu" th:action="@{/}" method="get">
+        <button class="button button-indkøbskurv">Hovedside</button>
       </form>
     </div>
   </div>
