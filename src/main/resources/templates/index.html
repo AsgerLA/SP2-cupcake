@@ -9,13 +9,17 @@
 <body class="body-index">
 <div class="flexbox-container">
   <div class="flexbox-item-upperbanner">
+    <div class="flexbox-item1and2-in-upperbanner">
       <th:block th:insert="~{/fragments.html :: header}"></th:block>
-      <th:block th:insert="~{/fragments.html :: admin}"></th:block>
+      <a class="header-menu" href="/orders">
+        <button class="button button-ordrer" type="button">Ordrer</button>
+      </a>
+    </div>
     <div class="flexbox-item3and4-in-upperbanner">
       <th:block th:insert="~{/fragments.html :: user}"></th:block>
-      <form class="header-menu" th:action="@{/indkobskurv}" method="get">
-        <button class="button button-indkøbskurv">Indkøbskurv</button>
-      </form>
+      <a class="header-menu" href="/indkobskurv">
+        <button class="button button-indkøbskurv" type="button">Indkøbskurv</button>
+      </a>
     </div>
   </div>
   <div class="flexbox-item-picture">
