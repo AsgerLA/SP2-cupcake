@@ -118,4 +118,34 @@ public class UserMapper {
 
         return users;
     }
+
+    public static boolean delUser(int userId)
+    {
+        String sql = "DELETE FROM orders WHERE orders.user_id=?; DELETE FROM users WHERE users.id=?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, userId);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 1;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
+
+    public static boolean setUserBalance(int userId, double balance)
+    {
+        String sql = "UPDATE users SET users.balance WHERE users.id=?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
 }

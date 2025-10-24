@@ -90,6 +90,21 @@ public class OrderMapper {
         return false;
     }
 
+    public static boolean delOrder(int orderId)
+    {
+        String sql = "DELETE FROM orders WHERE orders.id=?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, orderId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
+
     public static List<Topping> getToppings()
     {
         List<Topping> toppings = new ArrayList<>();
@@ -127,5 +142,67 @@ public class OrderMapper {
         }
 
         return bottoms;
+    }
+
+    public static boolean addTopping(String name, double price)
+    {
+        String sql = "INSERT INTO toppings (name, price) VALUES(?, ?)";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setDouble(2, price);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
+
+    public static boolean addBottom(String name, double price)
+    {
+        String sql = "INSERT INTO bottoms (name, price) VALUES(?, ?)";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setDouble(2, price);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
+
+    public static boolean delTopping(int id)
+    {
+        String sql = "DELETE FROM toppings WHERE toppings.id=?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
+    }
+
+    public static boolean delBottom(int id)
+    {
+        String sql = "DELETE FROM bottoms WHERE bottoms.id=?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return false;
     }
 }
