@@ -148,4 +148,33 @@ public class UserMapper {
 
         return false;
     }
+
+    public static User getUserById(int userId)
+    {
+        User user = null;
+        String sql = "SELECT users.id, users.email, users.balance, users.admin FROM users WHERE id = ?";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getDouble("balance"),
+                        rs.getBoolean("admin")
+                );
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return user;
+    }
+
+
 }

@@ -55,18 +55,25 @@ public class AdminController {
 
     public static void serveAdminSpecOrdersPage(Context ctx)
     {
-        User user;
+        User admin = ctx.sessionAttribute("user");
 
-        user = ctx.sessionAttribute("user");
-        if (user == null) {
+        if (admin == null) {
             ctx.sessionAttribute("loginredirect", Path.Web.ADMIN_SPEC_ORDERS);
             ctx.redirect(Path.Web.LOGIN);
             return;
         }
-        ctx.attribute("user", user);
-        ctx.attribute("orders", OrderMapper.getUserOrders(user.getId()));
+
+        //Får id'et fra url'en og tager det med videre
+        int userId = Integer.parseInt(ctx.pathParam("id"));
+
+        User selectedUser = UserMapper.getUserById(userId);
+
+        ctx.attribute("user", selectedUser);
+        ctx.attribute("orders", OrderMapper.getUserOrders(userId));
+
 
         ctx.render(Path.Template.ADMIN_SPEC_ORDERS);
     }
+
 
 }

@@ -27,7 +27,11 @@
         <div class="flexbox-admin-kundedata">
             <div class="flexbox-admin-kundedata-styling">
                 <div class="kunde-række" th:each="user : ${users}">
-                    <span th:text="${user.getEmail()}"></span>
+                    <span>
+                        <a th:href="@{/adminSpecifikBrugerOrdrer/{id}(id=${user.getId()})}"
+                           th:text="${user.getEmail()}"></a>
+
+                    </span>
                     <span>-</span>
                     <span th:text="${user.getId()}"></span>
                     <span>-</span>
