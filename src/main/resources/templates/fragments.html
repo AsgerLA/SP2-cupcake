@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <body>
 <div th:fragment="header">
-    <div class="flexbox-item1and2-in-upperbanner">
         <div class="header-menu" th:if="${user} != null">
             <form action="/logout" method="POST">
                 <button class="button button-logpå" type="submit">Log ud</button>
@@ -12,17 +11,16 @@
                 <button class="button button-logpå" type="button">Log på</button>
             </a>
         </div>
-        <a class="header-menu" href="/orders">
-            <button class="button button-ordrer" type="button">Ordrer</button>
-        </a>
-    </div>
+
 </div>
 <div th:fragment="admin">
-    <div class="flexbox-item-admin-box">
-        <form class="header-menu" th:action="@{/admin}" method="get">
-            <button class="button button-admin">Admin</button>
-        </form>
-    </div>
+    <th:block th:if="${user} != null">
+        <div th:if="${user.isAdmin()}" class="flexbox-item-admin-box">
+            <a class="header-menu" href="/admin">
+                <button class="button button-admin" type="button">Admin</button>
+            </a>
+        </div>
+    </th:block>
 </div>
 <div th:fragment="user">
     <th:block th:if="${user} != null">

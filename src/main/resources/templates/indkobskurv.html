@@ -9,12 +9,17 @@
 
 <div class="flexbox-container-indkøbskurv">
   <div class="flexbox-item-upperbanner">
-    <th:block th:insert="~{/fragments.html :: header}"></th:block>
+    <div class="flexbox-item1and2-in-upperbanner">
+      <th:block th:insert="~{/fragments.html :: header}"></th:block>
+      <a class="header-menu" href="/orders">
+        <button class="button button-ordrer" type="button">Ordrer</button>
+      </a>
+    </div>
     <div class="flexbox-item3and4-in-upperbanner">
       <th:block th:insert="~{/fragments.html :: user}"></th:block>
-      <form class="header-menu" th:action="@{/}" method="get">
-        <button class="button button-indkøbskurv">Hovedside</button>
-      </form>
+      <a class="header-menu" href="/">
+        <button class="button button-indkøbskurv" type="button">Hovedside</button>
+      </a>
     </div>
   </div>
   <h1 class="indkøbs-h1">Din indkøbskurv:</h1>
