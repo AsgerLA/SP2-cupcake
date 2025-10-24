@@ -38,21 +38,19 @@
     <form action="/indkobskurv" method="POST">
       <div class="topping-dropdown">
         <button type="button" class="topping-button">Toppings ⬇</button>
-        <div class="topping-content">
-          <label th:each="topping : ${toppings}">
-            <input type="checkbox" name="topping" th:value="${topping.getId()}">
-            <span th:text="${topping.getName()}"></span>
-          </label>
-        </div>
+        <select class="topping-content" name="topping" th:size="${toppings.size()}">
+          <th:block th:each="topping : ${toppings}">
+            <option th:value="${topping.getId()}" th:text="${topping.getName()}"></option>
+          </th:block>
+        </select>
       </div>
       <div class="bund-dropdown">
         <button type="button" class="bund-button">Bund ⬇</button>
-        <div class="bund-content">
-          <label th:each="bottom : ${bottoms}">
-            <input type="checkbox" name="bottom" th:value="${bottom.getId()}">
-            <span th:text="${bottom.getName()}"></span>
-          </label>
-        </div>
+        <select class="bund-content" name="bottom" th:size="${bottoms.size()}">
+          <th:block th:each="bottom : ${bottoms}">
+            <option th:value="${bottom.getId()}" th:text="${bottom.getName()}"></option>
+          </th:block>
+        </select>
       </div>
       <div class="antal-input">
         <label for="antal">Antal:</label>
