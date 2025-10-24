@@ -1,5 +1,6 @@
-package app;
+package app.controllers;
 
+import app.Path;
 import app.entities.Order;
 import app.entities.User;
 import app.persistence.OrderMapper;

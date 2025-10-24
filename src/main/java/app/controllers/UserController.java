@@ -1,5 +1,7 @@
-package app;
+package app.controllers;
 
+import app.Path;
+import app.Server;
 import app.entities.Order;
 import app.entities.Topping;
 import app.entities.Bottom;

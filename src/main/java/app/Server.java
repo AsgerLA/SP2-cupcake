@@ -1,14 +1,18 @@
 package app;
 
+import app.controllers.OrderController;
+import app.controllers.UserController;
 import app.entities.Bottom;
 import app.entities.Topping;
+import app.persistence.Database;
 import app.persistence.OrderMapper;
+
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
