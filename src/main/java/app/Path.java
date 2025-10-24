@@ -13,6 +13,9 @@ public class Path {
         public static final String REMOVE_ORDER = "/remove-order";
         public static final String BASKET = "/indkobskurv";
         public static final String REMOVE_BASKET = "/remove-basket/{id}";
+        public static final String ADMIN_ORDERS = "/adminAlleOrdrer";
+        public static final String ADMIN_SPEC_ORDERS = "/adminSpecifikBrugerOrdrer";
+
     }
 
     public static class Template {
@@ -22,5 +25,8 @@ public class Path {
         public static final String ORDERS = "/ordrer.html";
         public static final String BASKET = "/indkobskurv.html";
         public static final String ADMIN = "/admin.html";
+        public static final String ADMIN_ORDERS = "/adminAlleOrdrer.html";
+        public static final String ADMIN_SPEC_ORDERS = "/adminSpecifikBrugerOrdrer.html";
+
     }
 }

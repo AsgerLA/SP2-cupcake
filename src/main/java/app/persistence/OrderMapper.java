@@ -37,6 +37,33 @@ public class OrderMapper {
         return orders;
     }
 
+    public static List<Order> getAllUserOrders()
+    {
+        List<Order> allOrders = new ArrayList<>();
+        ResultSet rs;
+        String sql = "SELECT orders.id, orders.price, orders.count, toppings.name, bottoms.name FROM orders JOIN toppings ON orders.top_id=toppings.id JOIN bottoms ON orders.bot_id=bottoms.id";
+
+        try (Connection conn = Server.db.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            //ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                allOrders.add(new Order(
+                        rs.getInt(1),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(3),
+                        rs.getDouble(2)
+                        ));
+            }
+
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return allOrders;
+    }
+
     public static boolean addUserOrders(int userId, List<Order> orders)
     {
         String sql = "INSERT INTO orders (user_id, top_id, bot_id, count, price) VALUES(?, ?, ?, ?, ?)";

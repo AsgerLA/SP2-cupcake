@@ -24,7 +24,6 @@ public class UserController {
         app.get(Path.Web.INDEX, UserController::serveIndexPage);
         app.get(Path.Web.LOGIN, UserController::serveLoginPage);
         app.get(Path.Web.BASKET, UserController::serveBasketPage);
-        app.get(Path.Web.ADMIN,UserController::serveAdminPage);
         app.post(Path.Web.LOGIN, UserController::handleLoginPost);
         app.post(Path.Web.LOGOUT, UserController::handleLogoutPost);
         app.post(Path.Web.REGISTER, UserController::handleRegisterPost);
@@ -77,27 +76,6 @@ public class UserController {
 
         ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
         ctx.render(Path.Template.BASKET);
-        ctx.sessionAttribute("errmsg", null);
-    }
-    public static void serveAdminPage(Context ctx)
-    {
-        User user;
-
-        user = ctx.sessionAttribute("user");
-        if (user == null) {
-            ctx.sessionAttribute("loginredirect", Path.Web.ADMIN);
-            ctx.redirect(Path.Web.LOGIN);
-            return;
-        }
-
-        ctx.attribute("user", user);
-        ctx.attribute("toppings", Server.AppData.toppings);
-        ctx.attribute("bottoms", Server.AppData.bottoms);
-
-        ctx.attribute("users", UserMapper.getUsers());
-
-        ctx.attribute("errmsg", ctx.sessionAttribute("errmsg"));
-        ctx.render(Path.Template.ADMIN);
         ctx.sessionAttribute("errmsg", null);
     }
 

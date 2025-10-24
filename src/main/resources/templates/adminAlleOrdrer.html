@@ -17,11 +17,24 @@
     </div>
 </div>
 <div class="flexbox-item-admin-h1-box">
-    <h1>Alle ordrer</h1>
+    <h1>Alle ordrer:</h1>
 </div>
 <div class="flexbox-item-ordreinfo">
     <span>Ordre id:</span><span>-</span><span>Topping:</span><span>-</span>
     <span>Bund:</span><span>-</span><span>Antal:</span><span>-</span><span>Pris:</span>
+</div>
+<div class="flexbox-ordrer-data">
+    <div class="ordre-række" th:each="order : ${allOrders}">
+        <span th:text="${order.getId()}"></span>
+        <span>-</span>
+        <span th:text="${order.getTopping()}"></span>
+        <span>-</span>
+        <span th:text="${order.getBottom()}"></span>
+        <span>-</span>
+        <span th:text="${order.getCount()}"></span>
+        <span>-</span>
+        <span th:text="${order.getPrice()}"></span>
+    </div>
 </div>
 
 </body>
