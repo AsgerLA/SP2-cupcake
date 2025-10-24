@@ -1,5 +1,6 @@
 package app;
 
+import app.controllers.AdminController;
 import app.controllers.OrderController;
 import app.controllers.UserController;
 import app.entities.Bottom;
@@ -66,6 +67,7 @@ public class Server {
 
         UserController.addRoutes(app);
         OrderController.addRoutes(app);
+        AdminController.addRoutes(app);
 
         AppData.toppings = OrderMapper.getToppings();
         AppData.bottoms = OrderMapper.getBottoms();
