@@ -9,7 +9,9 @@
     <div class="flexbox-container-admin-mainpage">
         <div class="flexbox-item-upperbanner">
             <th:block th:insert="~{/fragments.html :: header}"></th:block>
-            <th:block th:insert="~{/fragments.html :: admin}"></th:block>
+            <a href="/">
+                <button class="button button-index" type="button">Hovedside</button>
+            </a>
             <div class="flexbox-item3and4-in-upperbanner">
                 <span>Du er i admin-view</span>
                 <form class="header-menu" th:action="@{/admin/users}" method="get">
@@ -28,7 +30,7 @@
             <div class="flexbox-admin-kundedata-styling">
                 <div class="kunde-række" th:each="user : ${users}">
                     <span>
-                        <a th:href="@{/admin/user-order/{id}(id=${user.getId()})}"
+                        <a th:href="@{/admin/user-orders/{id}(id=${user.getId()})}"
                            th:text="${user.getEmail()}"></a>
 
                     </span>

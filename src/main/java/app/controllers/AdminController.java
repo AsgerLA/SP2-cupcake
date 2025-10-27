@@ -28,6 +28,8 @@ public class AdminController {
             ctx.sessionAttribute("loginredirect", Path.Web.ADMIN);
             ctx.redirect(Path.Web.LOGIN);
         }
+
+        ctx.attribute("user", user);
     }
 
     public static void serveAdminPage(Context ctx)
