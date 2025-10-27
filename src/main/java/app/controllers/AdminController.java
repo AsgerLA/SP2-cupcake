@@ -22,6 +22,7 @@ public class AdminController {
         app.post(Path.Web.ADMIN_DEL_TOPPING, AdminController::handleDelToppingPost);
         app.post(Path.Web.ADMIN_DEL_BOTTOM, AdminController::handleDelBottomPost);
 
+        app.post(Path.Web.ADMIN_UPDATE_BALANCE, AdminController::handleBalanceUpdatePost);
     }
 
     public static void ensureAdmin(Context ctx)
@@ -100,6 +101,13 @@ public class AdminController {
         UserMapper.delUser(userId);
         ctx.redirect(Path.Web.ADMIN);
 
+    }
+    public static void handleBalanceUpdatePost(Context ctx)
+    {
+        double balance = Double.parseDouble(ctx.formParam("balance"));
+        int userId = Integer.parseInt(ctx.pathParam("id"));
+        UserMapper.setUserBalance(userId, balance);
+        ctx.redirect(Path.Web.ADMIN);
     }
 
     public static void handleAddCupcakePost(Context ctx)
