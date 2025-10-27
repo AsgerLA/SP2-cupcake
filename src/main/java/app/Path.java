@@ -18,6 +18,7 @@ public class Path {
         public static final String ADMIN_SPEC_ORDERS = "/admin/user-orders/{id}";
         public static final String ADMIN_REMOVE_ORDER = "/admin/remove-order/{id}";
         public static final String ADMIN_UPDATE_BALANCE = "/admin/update-balance/{id}";
+        public static final String ADMIN_REMOVE_USER = "admin/remove-user/{id}";
 
     }
 

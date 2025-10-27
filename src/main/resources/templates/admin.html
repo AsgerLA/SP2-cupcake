@@ -38,14 +38,13 @@
                     <span>
                         <a th:href="@{/admin/user-orders/{id}(id=${user.getId()})}"
                            th:text="${user.getEmail()}"></a>
-
                     </span>
                     <span>-</span>
                     <span th:text="${user.getId()}"></span>
                     <span>-</span>
                     <span th:text="${user.getBalance()}"></span>
                     <span>-</span>
-                    <form class="admin-kundedel-knap" th:action="@{/remove-user/{id} (id=${user.getId()})}" method="post">
+                    <form class="admin-kundedel-knap" th:action="@{/admin/remove-user/{id} (id=${user.getId()})}" method="post">
                         <button type="submit">Del</button>
                     </form>
 

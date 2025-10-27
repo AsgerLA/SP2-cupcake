@@ -359,7 +359,7 @@ body{
   height:70%;
 }
 .flexbox-ordrer-data span{
-  font-size: 3.5vw;
+  font-size: 2.5vw;
   margin-right: 100px;
 }
 .flexbox-item-admin-h1-box{
@@ -390,19 +390,18 @@ body{
   height:70%;
 }
 .flexbox-admin-kundedata span{
-  font-size: 3.5vw;
+  font-size: 2vw;
   margin-right: 100px;
 }
 .flexbox-admin-kundedata-styling{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: lightgrey;
   width:100%;
 }
 .kunde-række{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
 }
 .admin-kundebalance-knap{
