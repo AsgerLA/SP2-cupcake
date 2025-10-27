@@ -40,16 +40,16 @@
       <div class="topping-dropdown">
         <button type="button" class="topping-button">Toppings ⬇</button>
         <select class="topping-content" name="topping" th:size="${toppings.size()}">
-          <th:block th:each="topping : ${toppings}">
-            <option th:value="${topping.getId()}" th:text="${topping.getName()}"></option>
+          <th:block th:each="topping,iter : ${toppings}">
+            <option th:value="${iter.index}" th:text="${topping.getName()}"></option>
           </th:block>
         </select>
       </div>
       <div class="bund-dropdown">
         <button type="button" class="bund-button">Bund ⬇</button>
         <select class="bund-content" name="bottom" th:size="${bottoms.size()}">
-          <th:block th:each="bottom : ${bottoms}">
-            <option th:value="${bottom.getId()}" th:text="${bottom.getName()}"></option>
+          <th:block th:each="bottom,iter : ${bottoms}">
+            <option th:value="${iter.index}" th:text="${bottom.getName()}"></option>
           </th:block>
         </select>
       </div>

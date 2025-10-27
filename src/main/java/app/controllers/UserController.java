@@ -139,8 +139,8 @@ public class UserController {
     {
         User user;
         int count;
-        int topId;
-        int botId;
+        int topIx;
+        int botIx;
         List<Order> basket;
         double price, subtotal;
         Topping top;
@@ -154,10 +154,10 @@ public class UserController {
                 return;
             }
             count = Integer.decode(ctx.formParam("count"));
-            topId = Integer.decode(ctx.formParam("topping"));
-            botId = Integer.decode(ctx.formParam("bottom"));
-            if (count == 0 || topId == 0 || botId == 0)
-                throw new Exception();
+            topIx = Integer.decode(ctx.formParam("topping"));
+            botIx = Integer.decode(ctx.formParam("bottom"));
+            if (count == 0 || topIx < 0 || botIx < 0)
+                throw new Exception("bad count or index");
             basket = ctx.sessionAttribute("basket");
             assert basket != null;
             if (basket.size() >= MAX_BASKET) {
@@ -165,17 +165,18 @@ public class UserController {
                 ctx.redirect(Path.Web.INDEX);
                 return;
             }
-            top = Server.AppData.toppings.get(topId-1);
-            bot = Server.AppData.bottoms.get(botId-1);
+            top = Server.AppData.toppings.get(topIx);
+            bot = Server.AppData.bottoms.get(botIx);
             price = top.getPrice() + bot.getPrice();
             Order o = new Order(0, top.getName(), bot.getName(), count, price);
-            o.topId = topId;
-            o.botId = botId;
+            o.topId = top.getId();
+            o.botId = bot.getId();
             basket.add(o);
             subtotal = ctx.sessionAttribute("subtotal");
             ctx.sessionAttribute("subtotal", subtotal+price*count);
             ctx.redirect(Path.Web.INDEX);
         } catch (Exception e) {
+            e.printStackTrace();
             ctx.sessionAttribute("errmsg", "* Invalid order");
             ctx.redirect(Path.Web.INDEX);
         }

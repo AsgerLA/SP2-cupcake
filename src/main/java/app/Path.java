@@ -18,7 +18,10 @@ public class Path {
         public static final String ADMIN_SPEC_ORDERS = "/admin/user-orders/{id}";
         public static final String ADMIN_REMOVE_ORDER = "/admin/remove-order/{id}";
         public static final String ADMIN_UPDATE_BALANCE = "/admin/update-balance/{id}";
-        public static final String ADMIN_REMOVE_USER = "admin/remove-user/{id}";
+        public static final String ADMIN_REMOVE_USER = "/admin/remove-user/{id}";
+        public static final String ADMIN_ADD_CUPCAKE = "/admin/add-cupcake";
+        public static final String ADMIN_DEL_TOPPING = "/admin/remove-topping/{id}";
+        public static final String ADMIN_DEL_BOTTOM = "/admin/remove-bottom/{id}";
 
     }
 

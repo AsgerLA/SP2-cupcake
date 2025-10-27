@@ -66,7 +66,7 @@
                 <button type="button" class="topping-button">Toppings ⬇</button>
                 <div class="topping-content">
                     <div th:each="topping : ${toppings}">
-                        <form class="topping-del-knap" th:action="@{/remove-topping/{id} (id=${topping.getId()})}" method="post">
+                        <form class="topping-del-knap" th:action="@{/admin/remove-topping/{id} (id=${topping.getId()})}" method="post">
                                 <button type="submit">X</button>
                                 <span th:text="${topping.getName()}"></span>
                         </form>
@@ -77,7 +77,7 @@
                 <button type="button" class="bund-button">Bund ⬇</button>
                     <div class="bund-content">
                         <div th:each="bottom : ${bottoms}">
-                            <form class="bund-del-knap" th:action="@{/remove-bottom/{id} (id=${bottom.getId()})}" method="post">
+                            <form class="bund-del-knap" th:action="@{/admin/remove-bottom/{id} (id=${bottom.getId()})}" method="post">
 
                                 <button type="submit">X</button>
                                 <span th:text="${bottom.getName()}"></span>
@@ -86,11 +86,16 @@
                         </div>
                      </div>
             </div>
-                <form action="/database" method="POST">
+                <form action="/admin/add-cupcake" method="POST">
                     <div class="insert-topping-bottom-field-admin">
                     <div class="topping-input-admin">
                         <label for="topping-indsættelse"></label>
-                        <input type="text" id="topping-indsættelse" placeholder="Indsæt topping her:">
+                        <input type="text" id="topping-indsættelse" placeholder="Indsæt topping her:" name="name">
+                        <input type="text" id="pris-indsættelse" placeholder="Indsæt pris her:" name="price">
+                        <input type="radio" id="type-top" name="type" value="topping">
+                        <input type="radio" id="type-bot" name="type" value="bottom">
+                        <label for="type-top">Topping</label>
+                        <label for="type-bot">Bottom</label>
                     </div>
                     <div class="bottom-input-admin">
                         <label for="bottom-indsættelse"></label>

@@ -7,6 +7,7 @@ import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 
 public class AdminController {
     public static void addRoutes(Javalin app)
@@ -17,6 +18,9 @@ public class AdminController {
         app.get(Path.Web.ADMIN_SPEC_ORDERS, AdminController::serveAdminSpecOrdersPage);
         app.post(Path.Web.ADMIN_REMOVE_ORDER, AdminController::handleRemovePost);
         app.post(Path.Web.ADMIN_REMOVE_USER, AdminController::handleUserDeletePost);
+        app.post(Path.Web.ADMIN_ADD_CUPCAKE, AdminController::handleAddCupcakePost);
+        app.post(Path.Web.ADMIN_DEL_TOPPING, AdminController::handleDelToppingPost);
+        app.post(Path.Web.ADMIN_DEL_BOTTOM, AdminController::handleDelBottomPost);
 
     }
 
@@ -98,5 +102,66 @@ public class AdminController {
 
     }
 
+    public static void handleAddCupcakePost(Context ctx)
+    {
+        String name;
+        double price;
+        String type;
+        boolean res = false;
+
+        try {
+            name = ctx.formParam("name");
+            price = Double.parseDouble(ctx.formParam("price"));
+            type = ctx.formParam("type");
+            if (type.equals("topping")) {
+                res = OrderMapper.addTopping(name, price);
+                Server.AppData.toppings = OrderMapper.getToppings();
+            } else if (type.equals("bottom")) {
+                res = OrderMapper.addBottom(name, price);
+                Server.AppData.bottoms = OrderMapper.getBottoms();
+            }
+            if (!res)
+                ctx.sessionAttribute("errmsg", "Could not add cupcake!");
+            ctx.redirect(Path.Web.ADMIN);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public static void handleDelToppingPost(Context ctx)
+    {
+        int id;
+
+        try {
+            id = Integer.parseInt(ctx.pathParam("id"));
+            if (id <= 0)
+                throw new Exception("bad id");
+            if (!OrderMapper.delTopping(id))
+                ctx.sessionAttribute("errmsg", "Could not delete topping");
+            else
+                Server.AppData.toppings = OrderMapper.getToppings();
+            ctx.redirect(Path.Web.ADMIN);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public static void handleDelBottomPost(Context ctx)
+    {
+        int id;
+
+        try {
+            id = Integer.parseInt(ctx.pathParam("id"));
+            if (id <= 0)
+                throw new Exception("bad id");
+            if (!OrderMapper.delBottom(id))
+                ctx.sessionAttribute("errmsg", "Could not delete bottom");
+            else
+                Server.AppData.bottoms = OrderMapper.getBottoms();
+            ctx.redirect(Path.Web.ADMIN);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
