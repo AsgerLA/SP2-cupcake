@@ -28,6 +28,7 @@ public class AdminController {
             ctx.sessionAttribute("errmsg", "unauthorized");
             ctx.sessionAttribute("loginredirect", Path.Web.ADMIN);
             ctx.redirect(Path.Web.LOGIN);
+            return;
         }
 
         ctx.attribute("user", user);
@@ -46,15 +47,6 @@ public class AdminController {
     }
     public static void serveAdminOrdersPage(Context ctx)
     {
-        User user;
-
-        user = ctx.sessionAttribute("user");
-        if (user == null) {
-            ctx.sessionAttribute("loginredirect", Path.Web.ADMIN_ORDERS);
-            ctx.redirect(Path.Web.LOGIN);
-            return;
-        }
-        //ctx.attribute("user", user);
         ctx.attribute("allOrders", OrderMapper.getAllUserOrders());
 
         ctx.render(Path.Template.ADMIN_ORDERS);
@@ -62,14 +54,6 @@ public class AdminController {
 
     public static void serveAdminSpecOrdersPage(Context ctx)
     {
-        User admin = ctx.sessionAttribute("user");
-
-        if (admin == null) {
-            ctx.sessionAttribute("loginredirect", Path.Web.ADMIN_SPEC_ORDERS);
-            ctx.redirect(Path.Web.LOGIN);
-            return;
-        }
-
         //Får id'et fra url'en og tager det med videre
         int userId = Integer.parseInt(ctx.pathParam("id"));
 
