@@ -13,7 +13,7 @@
     </a>
     <div class="flexbox-item3and4-in-upperbanner">
         <span>Du er i admin-view</span>
-        <form class="header-menu" th:action="@{/admin/users}" method="get">
+        <form class="header-menu" th:action="@{/admin}" method="get">
             <button class="button button-kundeoversigt">Kunder</button>
         </form>
     </div>
@@ -36,6 +36,9 @@
         <span th:text="${order.getCount()}"></span>
         <span>-</span>
         <span th:text="${order.getPrice()}"></span>
+        <form class="admin-ordrer-del-knap" th:action="@{/admin/remove-order/{id} (id=${order.getId()})}" method="post">
+            <button type="submit">Del</button>
+        </form>
     </div>
 </div>
 

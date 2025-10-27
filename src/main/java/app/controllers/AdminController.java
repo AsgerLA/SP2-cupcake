@@ -15,6 +15,7 @@ public class AdminController {
         app.get(Path.Web.ADMIN, AdminController::serveAdminPage);
         app.get(Path.Web.ADMIN_ORDERS, AdminController::serveAdminOrdersPage);
         app.get(Path.Web.ADMIN_SPEC_ORDERS, AdminController::serveAdminSpecOrdersPage);
+        app.post(Path.Web.ADMIN_REMOVE_ORDER, AdminController::handleRemovePost);
 
     }
 
@@ -79,6 +80,13 @@ public class AdminController {
 
 
         ctx.render(Path.Template.ADMIN_SPEC_ORDERS);
+    }
+
+    public static void handleRemovePost(Context ctx)
+    {
+        int orderId = Integer.parseInt(ctx.pathParam("id"));
+        OrderMapper.delOrder(orderId);
+        ctx.redirect(Path.Web.ADMIN_ORDERS);
     }
 
 
