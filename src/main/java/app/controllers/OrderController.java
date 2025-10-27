@@ -4,6 +4,7 @@ import app.Path;
 import app.entities.Order;
 import app.entities.User;
 import app.persistence.OrderMapper;
+import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -47,11 +48,13 @@ public class OrderController {
                 return;
             }
             subtotal = ctx.sessionAttribute("subtotal");
-            if (subtotal > user.getBalance()) {
+            if (subtotal >= user.getBalance()) {
                 ctx.sessionAttribute("errmsg", "* insufficient funds");
                 ctx.redirect(Path.Web.BASKET);
                 return;
             }
+            UserMapper.setUserBalance(user.getId(), user.getBalance()-subtotal);
+            ctx.sessionAttribute("subtotal", 0.0);
             basket = ctx.sessionAttribute("basket");
             assert basket != null;
             OrderMapper.addUserOrders(user.getId(), basket);

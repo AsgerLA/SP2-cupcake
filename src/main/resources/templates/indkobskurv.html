@@ -60,8 +60,7 @@
   </div>
   <div class="flexbox-container-prisbox">
     <span>Subtotal:</span><span th:text="${subtotal}"></span>
-    <span>Levering:</span><span>40kr</span>
-    <span>Pris i alt:</span><span th:text="${subtotal+40}"></span>
+    <span>Pris i alt:</span><span th:text="${subtotal}"></span>
     <form class="ordrer-betal-knap" th:action="@{/order}" method="post">
       <button type="submit">Betal</button>
     </form>
