@@ -107,7 +107,18 @@ public class AdminController {
         double balance = Double.parseDouble(ctx.formParam("balance"));
         int userId = Integer.parseInt(ctx.pathParam("id"));
         UserMapper.setUserBalance(userId, balance);
+
+        User updatedUser = UserMapper.getUserById(userId);
+
+        User currentUser = ctx.sessionAttribute("user");
+        if (currentUser != null && currentUser.getId() == userId) {
+            ctx.sessionAttribute("user", updatedUser);
+        }
+
         ctx.redirect(Path.Web.ADMIN);
+
+
+
     }
 
     public static void handleAddCupcakePost(Context ctx)

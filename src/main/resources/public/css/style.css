@@ -119,7 +119,7 @@ body{
   margin-right: 0;
 }
 .ordrer-detaljer span{
-  margin-left: 8vw;
+  margin-left: 4vw;
   font-size: 24px;
 }
 .ordrer-box{
@@ -451,10 +451,11 @@ body{
   margin-right: 55%;
 }
 .insert-topping-bottom-field-admin{
+  margin-top:10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   gap: 50px;
 }

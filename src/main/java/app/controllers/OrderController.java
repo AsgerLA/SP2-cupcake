@@ -59,6 +59,14 @@ public class OrderController {
             assert basket != null;
             OrderMapper.addUserOrders(user.getId(), basket);
             basket.clear();
+
+            int userId = user.getId();
+            User updatedUser = UserMapper.getUserById(userId);
+            User currentUser = ctx.sessionAttribute("user");
+            if (currentUser != null && currentUser.getId() == userId) {
+                ctx.sessionAttribute("user", updatedUser);
+            }
+
             ctx.redirect(Path.Web.BASKET);
         } catch (Exception e) {
             ctx.status(HttpStatus.BAD_REQUEST);
