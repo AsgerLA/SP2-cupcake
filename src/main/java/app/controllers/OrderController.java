@@ -15,7 +15,6 @@ public class OrderController {
     {
         app.get(Path.Web.ORDERS, OrderController::serveOrdersPage);
         app.post(Path.Web.ORDER, OrderController::handleOrderPost);
-        app.post(Path.Web.REMOVE_ORDER, OrderController::handleRemoveOrderPost);
     }
 
     public static void serveOrdersPage(Context ctx)
@@ -63,8 +62,4 @@ public class OrderController {
         }
     }
 
-    public static void handleRemoveOrderPost(Context ctx)
-    {
-        ctx.status(HttpStatus.NOT_IMPLEMENTED);
-    }
 }
