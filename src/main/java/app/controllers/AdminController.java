@@ -53,15 +53,6 @@ public class AdminController {
     }
     public static void serveAdminOrdersPage(Context ctx)
     {
-        User user;
-
-        user = ctx.sessionAttribute("user");
-        if (user == null) {
-            ctx.sessionAttribute("loginredirect", Path.Web.ADMIN_ORDERS);
-            ctx.redirect(Path.Web.LOGIN);
-            return;
-        }
-        //ctx.attribute("user", user);
         ctx.attribute("allOrders", OrderMapper.getAllUserOrders());
 
         ctx.render(Path.Template.ADMIN_ORDERS);
@@ -69,18 +60,21 @@ public class AdminController {
 
     public static void serveAdminSpecOrdersPage(Context ctx)
     {
-        User admin = ctx.sessionAttribute("user");
+        int userId;
 
-        if (admin == null) {
-            ctx.sessionAttribute("loginredirect", Path.Web.ADMIN_SPEC_ORDERS);
-            ctx.redirect(Path.Web.LOGIN);
+        try {
+            //Får id'et fra url'en og tager det med videre
+            userId = Integer.parseInt(ctx.pathParam("id"));
+        } catch (Exception e) {
+            ctx.status(404);
             return;
         }
 
-        //Får id'et fra url'en og tager det med videre
-        int userId = Integer.parseInt(ctx.pathParam("id"));
-
         User selectedUser = UserMapper.getUserById(userId);
+        if (selectedUser == null) {
+            ctx.status(404);
+            return;
+        }
 
         ctx.attribute("user", selectedUser);
         ctx.attribute("orders", OrderMapper.getUserOrders(userId));
@@ -91,8 +85,17 @@ public class AdminController {
 
     public static void handleRemovePost(Context ctx)
     {
-        int orderId = Integer.parseInt(ctx.pathParam("id"));
-        OrderMapper.delOrder(orderId);
+        try {
+            int orderId = Integer.parseInt(ctx.pathParam("id"));
+            if (!OrderMapper.delOrder(orderId)) {
+                ctx.sessionAttribute("errmsg", "Failed to remove order");
+                ctx.redirect(Path.Web.ADMIN);
+                return;
+            }
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+            return;
+        }
         ctx.redirect(Path.Web.ADMIN_ORDERS);
     }
 
@@ -104,10 +107,15 @@ public class AdminController {
     }
     public static void handleBalanceUpdatePost(Context ctx)
     {
-        double balance = Double.parseDouble(ctx.formParam("balance"));
-        int userId = Integer.parseInt(ctx.pathParam("id"));
-        UserMapper.setUserBalance(userId, balance);
-        ctx.redirect(Path.Web.ADMIN);
+        try {
+            double balance = Double.parseDouble(ctx.formParam("balance"));
+            int userId = Integer.parseInt(ctx.pathParam("id"));
+            if (!UserMapper.setUserBalance(userId, balance))
+                ctx.sessionAttribute("errmsg", "Failed to set user balance");
+            ctx.redirect(Path.Web.ADMIN);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.BAD_REQUEST);
+        }
     }
 
     public static void handleAddCupcakePost(Context ctx)
