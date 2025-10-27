@@ -12,7 +12,7 @@
             <th:block th:insert="~{/fragments.html :: admin}"></th:block>
             <div class="flexbox-item3and4-in-upperbanner">
                 <span>Du er i admin-view</span>
-                <form class="header-menu" th:action="@{/kunder}" method="get">
+                <form class="header-menu" th:action="@{/admin/users}" method="get">
                     <button class="button button-kundeoversigt">Kunder</button>
                 </form>
             </div>
@@ -28,7 +28,7 @@
             <div class="flexbox-admin-kundedata-styling">
                 <div class="kunde-række" th:each="user : ${users}">
                     <span>
-                        <a th:href="@{/adminSpecifikBrugerOrdrer/{id}(id=${user.getId()})}"
+                        <a th:href="@{/admin/user-order/{id}(id=${user.getId()})}"
                            th:text="${user.getEmail()}"></a>
 
                     </span>
@@ -41,7 +41,7 @@
                         <button type="submit">Del</button>
                     </form>
 
-                    <form class="admin-kundebalance-knap" th:action="@{/updateBalance-user/{id} (id=${user.getId()})}" method="post">
+                    <form class="admin-kundebalance-knap" th:action="@{/admin/update-balance/{id} (id=${user.getId()})}" method="post">
                         <div class="balance-input">
                             <label for="balance"></label>
                             <input type="number" id="balance" name="balance" placeholder="Indtast balance her">

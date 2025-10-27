@@ -137,10 +137,12 @@ public class UserMapper {
 
     public static boolean setUserBalance(int userId, double balance)
     {
-        String sql = "UPDATE users SET users.balance WHERE users.id=?";
+        String sql = "UPDATE users SET balance=? WHERE users.id=?";
 
         try (Connection conn = Server.db.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setDouble(1, balance);
+            ps.setInt(2, userId);
             return ps.executeUpdate() == 1;
         } catch (Exception e) {
             System.err.println(e);

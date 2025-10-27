@@ -11,23 +11,27 @@ import io.javalin.http.Context;
 public class AdminController {
     public static void addRoutes(Javalin app)
     {
+        app.before(Path.Web.ADMIN_BEFORE, AdminController::ensureAdmin);
         app.get(Path.Web.ADMIN, AdminController::serveAdminPage);
         app.get(Path.Web.ADMIN_ORDERS, AdminController::serveAdminOrdersPage);
         app.get(Path.Web.ADMIN_SPEC_ORDERS, AdminController::serveAdminSpecOrdersPage);
 
     }
-    public static void serveAdminPage(Context ctx)
+
+    public static void ensureAdmin(Context ctx)
     {
         User user;
 
         user = ctx.sessionAttribute("user");
-        if (user == null) {
+        if (user == null || !user.isAdmin()) {
+            ctx.sessionAttribute("errmsg", "unauthorized");
             ctx.sessionAttribute("loginredirect", Path.Web.ADMIN);
             ctx.redirect(Path.Web.LOGIN);
-            return;
         }
+    }
 
-        ctx.attribute("user", user);
+    public static void serveAdminPage(Context ctx)
+    {
         ctx.attribute("toppings", Server.AppData.toppings);
         ctx.attribute("bottoms", Server.AppData.bottoms);
 

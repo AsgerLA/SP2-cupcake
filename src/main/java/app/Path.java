@@ -6,15 +6,19 @@ public class Path {
         public static final String INDEX = "/";
         public static final String LOGIN = "/login";
         public static final String LOGOUT = "/logout";
-        public static final String ADMIN = "/admin";
         public static final String REGISTER = "/register";
         public static final String ORDERS = "/orders";
         public static final String ORDER = "/order";
         public static final String REMOVE_ORDER = "/remove-order";
         public static final String BASKET = "/indkobskurv";
         public static final String REMOVE_BASKET = "/remove-basket/{id}";
-        public static final String ADMIN_ORDERS = "/adminAlleOrdrer";
-        public static final String ADMIN_SPEC_ORDERS = "/adminSpecifikBrugerOrdrer/{id}";
+
+        public static final String ADMIN_BEFORE = "/admin*";
+        public static final String ADMIN = "/admin";
+        public static final String ADMIN_ORDERS = "/admin/orders";
+        public static final String ADMIN_SPEC_ORDERS = "/admin/user-orders/{id}";
+        public static final String ADMIN_REMOVE_ORDER = "/admin/remove-order/{id}";
+        public static final String ADMIN_UPDATE_BALANCE = "/admin/update-balance/{id}";
 
     }
 
