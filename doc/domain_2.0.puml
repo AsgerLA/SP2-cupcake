@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object User
+object Topping
+object Order
+object Bottom
+object AdminController
+object OrderController
+object UserController
+object Database
+object OrderMapper
+object UserMapper
+
+Order o-- Topping
+Order o-- Bottom
+User --> Order
+UserMapper --> User
+UserController --> UserMapper
+OrderMapper --> Order
+OrderController --> OrderMapper
+AdminController --> OrderMapper
+AdminController --> UserMapper
+UserMapper --> Database
+OrderMapper --> Database
+@enduml
