@@ -23,21 +23,15 @@ public class Server {
     private static final String PASSWORD = "postgres";
     private static final String URL = "jdbc:postgresql://localhost:5432/cupcake?currentSchema=public";
     public static Database db;
+    private static Javalin app;
 
     public static class AppData {
         public static List<Topping> toppings = null;
         public static List<Bottom> bottoms = null;
     }
 
-    public static void main(String[] args)
+    public static void start(String ip, int port)
     {
-        Javalin app;
-        try {
-            db = new Database(USERNAME, PASSWORD, URL);
-        } catch (Exception e) {
-            System.err.println("Failed to connect to db");
-            System.exit(1);
-        }
         System.out.println("Starting server");
 
         TemplateEngine templateEngine = new TemplateEngine();
@@ -72,16 +66,34 @@ public class Server {
         AppData.toppings = OrderMapper.getToppings();
         AppData.bottoms = OrderMapper.getBottoms();
 
-        app.start(8000);
+        app.start(ip, port);
+    }
+
+    public static void stop()
+    {
+        System.out.println("Stopping server");
+        app.stop();
+    }
+
+    public static void main(String[] args)
+    {
+        try {
+           Server.db = new Database(USERNAME, PASSWORD, URL);
+        } catch (Exception e) {
+            System.err.println("Failed to connect to db");
+            System.exit(1);
+        }
+
+        Server.start("127.0.0.1", 8000);
 
         Scanner scan = new Scanner(System.in);
         while (true) {
             String line = scan.nextLine();
             if (line.equals("stop")) {
-                System.out.println("Stopping server");
                 break;
             }
         }
-        app.stop();
+
+        Server.stop();
     }
 }
